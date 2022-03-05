@@ -7,7 +7,7 @@ declare(strict_types=1);
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
-namespace CarlosChininin\App\Infrastructure\Twig;
+namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;

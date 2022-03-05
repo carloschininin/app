@@ -1,0 +1,439 @@
+
+{% macro btn(title, icon, btn_class='default',attributes='') -%}
+    <button  class="btn btn-{{btn_class}} {% if not title %}btn-icon{% endif %}" {{attributes}}>
+        {% if title %}<span>{% endif %}
+            {% if icon %}<i class="fa flaticon-{{ icon }}"></i>{% endif %}
+            {% if title %}<span>{{title|trans}}</span>{% endif %}
+            {% if title %}</span>{% endif %}
+    </button>
+{%- endmacro %}
+
+{% macro btn_save(title, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn(title,'folder-2','warning', attributes) }}
+{% endmacro %}
+
+{% macro btn_link(title, link, icon, btn_class='default',attributes='') -%}
+    <a href="{{ link }}"
+       class="btn btn-sm
+        {% if not title -%}
+            btn-icon btn-light-{{ btn_class }}
+        {%- else -%}
+            btn-{{ btn_class }}
+        {%- endif -%}"
+       title="{{ title }}">
+        {%- if icon -%}<i class="{{ icon }}"></i>{%- endif -%}
+        {%- if title -%}<span>{{title }}</span>{%- endif -%}
+    </a>
+{%- endmacro %}
+
+{% macro btn_link_ico(title, link, icon, btn_class='default',attributes='') -%}
+    <a href="{{ link }}" class="btn btn-sm btn-icon btn-light-{{ btn_class }}" title="{{ title }}">
+        <i class="{{ icon }}"></i>
+    </a>
+{%- endmacro %}
+
+{% macro btn_link_print(title, link, icon, btn_class='default',attributes='') -%}
+    <a href="{{ link }}" class="btn btn-{{btn_class}} m-btn m-btn--custom m-btn--icon {% if not title %}m-btn--icon-only{% endif %}" {{attributes}} target="_blank">
+        {% if title %}<span>{% endif %}
+            {% if icon %}<i class="fa flaticon-{{ icon }}"></i>{% endif %}
+            {% if title %}<span>{{title|trans}}</span>{% endif %}
+            {% if title %}</span>{% endif %}
+    </a>
+{%- endmacro %}
+
+{% macro btn_list_link(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link('Listar',link,'bi bi-list-ul','secondary', attributes) }}
+{% endmacro %}
+
+{% macro btn_new_link(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link('Nuevo',link,'bi bi-file-earmark-plus','success', attributes) }}
+{% endmacro %}
+
+{% macro btn_edit_link(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link('Editar',link,'bi bi-pencil-square','warning', attributes) }}
+{% endmacro %}
+
+{% macro btn_print_link(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link('Imprimir',link,'bi bi-printer','primary', attributes) }}
+{% endmacro %}
+
+{% macro btn_export_link(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link('Exportar',link,'bi bi-file-earmark-excel-fill','info', attributes) }}
+{% endmacro %}
+
+{% macro btn_list_link_ico(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link_ico('Listar',link,'bi bi-list-ul','dark', attributes) }}
+{% endmacro %}
+
+{% macro btn_new_link_ico(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link_ico('Nuevo',link,'bi bi-file-earmark-plus','success', attributes) }}
+{% endmacro %}
+
+{% macro btn_new_link_ico2(link, attributes='')%}
+    <a href="{{ link }}" class="btn btn-sm btn-icon btn-color-primary btn-active-light-success" title="Nuevo">
+        <i class="bi bi-file-earmark-plus"></i>
+    </a>
+{% endmacro %}
+
+{% macro btn_edit_link_ico(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link_ico('Editar',link,'bi bi-pencil-square','warning', attributes) }}
+{% endmacro %}
+
+{% macro btn_print_link_ico(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link_ico('Imprimir',link,'bi bi-printer','primary', attributes) }}
+{% endmacro %}
+
+{% macro btn_show_link_ico(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link_ico('Mostrar',link,'bi bi-search','info', attributes) }}
+{% endmacro %}
+
+{% macro btn_export_link_ico(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link_ico('Exportar',link,'bi bi-file-earmark-excel-fill','info', attributes) }}
+{% endmacro %}
+
+{% macro btn_delete_form(link, token, isActive = true) -%}
+    {% set labelName = isActive ? 'Inhabilitar' : 'Habilitar' %}
+    {% set labelClass = isActive ? 'btn-light-danger' : 'btn-light-info' %}
+    {% set labelIcon = isActive ? 'bi-x-circle' : 'bi-check-circle' %}
+    <form method="post" action="{{ link }}" onsubmit="return confirm('Seguro de {{ labelName }} este registro?');" style="display: inline">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ token }}">
+        <button class="btn btn-sm {{ labelClass }}">
+            <span>
+                <i class="bi {{ labelIcon }}"></i>
+                <span>{{ labelName }}</span>
+            </span>
+        </button>
+    </form>
+{%- endmacro %}
+
+{% macro btn_delete_forever_form(link, token) -%}
+    <form method="post" action="{{ link }}" onsubmit="return confirm('Seguro de eliminar definitivamente este registro?');" style="display: inline">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ token }}">
+        <button class="btn btn-sm btn-danger">
+            <span>
+                <i class="bi bi-trash-fill"></i>
+                <span>Eliminar</span>
+            </span>
+        </button>
+    </form>
+{%- endmacro %}
+
+{% macro btn_delete_form_ico(link, token, isActive = true) -%}
+    {% set labelName = isActive ? 'Inhabilitar' : 'Habilitar' %}
+    {% set labelClass = isActive ? 'btn-light-danger' : 'btn-light-info' %}
+    {% set labelIcon = isActive ? 'bi-x-circle' : 'bi-check-circle' %}
+    <form method="post" action="{{ link }}" onsubmit="return confirm('Seguro de {{ labelName }} este registro?');" style="display: inline">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ token }}">
+        <button class="btn btn-sm btn-icon {{ labelClass }}" title="{{ labelName }}">
+            <i class="bi {{ labelIcon }}"></i>
+        </button>
+    </form>
+{%- endmacro %}
+
+{% macro btn_link2(title, link, icon, btn_class='default',attributes='') -%}
+    <a href="{{ link }}" class="btn btn-outline-{{btn_class}} m-btn m-btn--icon {% if not title %}m-btn--icon-only{% endif %} m-btn--pill" {{attributes}}>
+        {% if title %}<span>{% endif %}
+            {% if icon %}<i class="fa flaticon-{{ icon }}"></i>{% endif %}
+            {% if title %}<span>{{title|trans}}</span>{% endif %}
+            {% if title %}</span>{% endif %}
+    </a>
+{%- endmacro %}
+
+{% macro btn_show_link2(link, attributes='')%}
+    {% import _self as actions %}
+    {{ actions.btn_link2('Mostrar',link,'search','primary', attributes) }}
+{% endmacro %}
+
+{% macro btn_show_link2_ico(link, attributes='')%}
+    <a href="{{ link }}" class="btn btn-icon btn-active-light-primary btn-sm me-0" title="Mostrar">
+        <!--begin::Svg Icon | path: assets/media/icons/duotone/Design/Zoom-In.svg-->
+        <span class="svg-icon svg-icon-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path opacity="0.25" fill-rule="evenodd" clip-rule="evenodd" d="M14.9056 16.3199C13.551 17.3729 11.8487 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10C18 11.8487 17.3729 13.551 16.3199 14.9056L21.7071 20.2929C22.0976 20.6834 22.0976 21.3166 21.7071 21.7071C21.3166 22.0976 20.6834 22.0976 20.2929 21.7071L14.9056 16.3199Z" fill="#12131A"/>
+                <path d="M10 6C9.44772 6 9 6.44772 9 7V9H7C6.44772 9 6 9.44771 6 10C6 10.5523 6.44772 11 7 11H9V13C9 13.5523 9.44772 14 10 14C10.5523 14 11 13.5523 11 13V11H13C13.5523 11 14 10.5523 14 10C14 9.44772 13.5523 9 13 9H11V7C11 6.44772 10.5523 6 10 6Z" fill="#12131A"/>
+            </svg>
+        </span>
+        <!--end::Svg Icon-->
+    </a>
+{% endmacro %}
+
+{% macro btn_edit_link2_ico(link, attributes='')%}
+    <a href="{{ link }}" class="btn btn-icon btn-active-light-warning btn-sm me-0" title="Editar">
+        <!--begin::Svg Icon | path: icons/stockholm/Communication/Write.svg-->
+        <span class="svg-icon svg-icon-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>
+                <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+            </svg>
+        </span>
+        <!--end::Svg Icon-->
+    </a>
+{% endmacro %}
+
+{% macro btn_print_link2_ico(link, attributes='target=blank')%}
+    <a href="{{ link }}" class="btn btn-icon btn-active-light-info btn-sm me-0" title="Imprimir">
+        <!--begin::Svg Icon | path: assets/media/icons/duotone/Computers/Printer.svg-->
+        <span class="svg-icon svg-icon-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path opacity="0.25" d="M2 11C2 9.89543 2.89543 9 4 9H20C21.1046 9 22 9.89543 22 11V17C22 18.1046 21.1046 19 20 19H4C2.89543 19 2 18.1046 2 17V11Z" fill="#12131A"/>
+                <path d="M7 16C7 15.4477 7.44772 15 8 15H16C16.5523 15 17 15.4477 17 16V20C17 21.1046 16.1046 22 15 22H9C7.89543 22 7 21.1046 7 20V16Z" fill="#12131A"/>
+                <path d="M7 4C7 2.89543 7.89543 2 9 2H15C16.1046 2 17 2.89543 17 4V9H7V4Z" fill="#12131A"/>
+            </svg>
+        </span>
+        <!--end::Svg Icon-->
+    </a>
+{% endmacro %}
+
+{# ########## FORMULARIOS ################# #}
+
+{% macro frm_start(form, form_class='') -%}
+    {{ form_start(form, {attr: {class: form_class, id: form.vars.id, autocomplete: 'off'}}) }}
+{%- endmacro %}
+
+{% macro frm_end(form) -%}
+    {{ form_rest(form) }}
+    {{ form_errors(form) }}
+    {{ form_end(form) }}
+{%- endmacro %}
+
+{% macro frm_field(value, class='', class_widget='') -%}
+    <div class="form-group m-form__group row {{ class }} pb-1">
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-md-4 col-sm-5'} }) }}
+        <div class="col-md-8 col-sm-7">
+            {{ form_widget(value, {attr: {class: 'form-control m-input' ~ class_widget} }) }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro frm_btn(label, class='') -%}
+    {% import _self as actions %}
+    <div class="form-group m-form__group row">
+        <div class="col-md-4 col-sm-12"></div>
+        <div class="col-md-8 col-sm-12">
+            {{ actions.btn_save(label) }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro frm_field_checkbox(value, class='', class_widget='') -%}
+    <span class="p-3 {{ class }}">
+        <label class="m-checkbox">
+            {{ form_widget(value, {attr: {class: '' ~ class_widget} }) }}
+            {% if value.vars.label %}
+                {{ value.vars.label | capitalize }}
+            {% else %}
+                {{ value.vars.name | capitalize }}
+            {% endif %}
+            <span></span>
+        </label>
+    </span>
+{%- endmacro %}
+
+{% macro frm_field_select_widget(value, class_widget='') %}
+    {{ form_widget(value, {attr: {class: 'm-input' ~ class_widget} }) }}
+{%- endmacro %}
+
+{% macro frm_field_collection(value, class_widget='') -%}
+    <div class="form-group m-form__group row">
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-lg-3 col-sm-12'} }) }}
+        <div class="col-md-9 col-sm-12">
+            <ul id="{{ value.vars.id }}" class="list-group"
+                data-prototype="{{ form_widget(value.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li class="list-group-item"></li>'|e }}">
+                {% for item in value %}
+                    <li class="list-group-item">
+                        {{ form_errors(item) }}
+                        {{ form_widget(item, {attr: {class: '' ~ class_widget} }) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div style="display: none;">
+            {{ form_row(value) }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro frm_field_file(value, item=null,class='', class_widget='') -%}
+    <div class="form-group m-form__group {{ class }}">
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-lg-3 col-sm-12'} }) }}
+        <div class="custom-file col-lg-4 col-md-9 col-sm-12">
+            {{ form_widget(value.file, {attr: {class: 'custom-file-input form-control m-input ' ~ class_widget} }) }}
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <div class="custom-file col-lg-4 col-md-9 col-sm-12">
+            {% if item %}
+                <label class="">
+                    {{ item.nombre }}
+                </label>
+            {% endif %}
+        </div>
+    </div>
+{%- endmacro %}
+
+{# ########## ALDAIR ################# #}
+
+{% macro btn_delete_modal(link, token) -%}
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#m_modal_1"> Eliminar</button>
+    <div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿ Esta seguro de eliminar este registro?
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="{{ link }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ token }}">
+                        <button class="btn">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+######### NEW ##############
+
+{% macro frm_help(value) %}
+    {% set help = value.vars.help %}
+    {% set help_attr = value.vars.help_attr %}
+    {%- if help is not empty -%}
+        {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' form-text font-italic font-size-sm mb-0')|trim}) -%}
+        <span id="{{ value.vars.id }}_help"
+            {% for attrname, attrvalue in help_attr %}
+                {{ attrname }}="{{ attrvalue }}"
+            {% endfor %} >
+            {{ help }}
+        </span>
+    {%- endif -%}
+{% endmacro %}
+
+
+{% macro frm_errors_class(value) %}
+    {%- if value is not null and value.vars.errors|length > 0 -%}
+        is-invalid
+    {%- endif -%}
+{% endmacro %}
+
+{% macro frm_errors(value) %}
+    {%- if value is not null and value.vars.errors|length > 0 -%}
+        <ul class="list-unstyled font-size-xs m-0">
+            {%- for error in value.vars.errors -%}
+                <li class="text-danger">{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+
+    {%- endif -%}
+{% endmacro %}
+
+{% macro frm_column(section1, section2=null, section3=null, section4=null, num=1) %}
+    {% import _self as actions %}
+    <div class="row">
+        {% if section1 or num >=1 %}
+            <div class="col-sm">
+                {{ section1 | raw }}
+            </div>
+        {% endif %}
+        {% if section2 or num >=2 %}
+            <div class="col-sm">
+                {{ section2 | raw }}
+            </div>
+        {% endif %}
+        {% if section3 or num >=3 %}
+            <div class="col-sm">
+                {{ section3 | raw }}
+            </div>
+        {% endif %}
+        {% if section4 or num >=4 %}
+            <div class="col-sm p-0">
+                {{ section4 | raw }}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro column2(value1, value2=null) %}
+    <div class="row">
+        <div class="col-sm-6">
+            {{ value1| raw }}
+        </div>
+        {% if value2 is not null %}
+            <div class="col-sm-6">
+                {{ value2| raw }}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro frm_column_field(value, class='', class_widget='', col=4) -%}
+    <div class="form-group m-form__group row {{ class }}">
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
+        <div class="col-{{- 12 - col -}}">
+            {{ form_widget(value, {attr: {class: 'form-control m-input ' ~ class_widget} }) }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro frm_column_field_select(value, class='', class_widget='', col=4) -%}
+    {% import _self as actions %}
+    {{ actions.frm_column_field(value, class, 'js-select2 '~class_widget, col) }}
+{%- endmacro %}
+
+{% macro frm_column_field_date(value, class='', class_widget='', col=4) %}
+    {% import _self as actions %}
+    <div class="form-group row {{ class }} {{ actions.frm_errors_class(value) }}">
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-4'} }) }}
+        <div class="col-sm-{{ 12-col }} col-8">
+            <div class="input-group mb-5">
+                {{ form_widget(value, {attr: {class: 'js-flatpickr form-control ' ~ class_widget ~ actions.frm_errors_class(value)} }) }}
+                <span class="input-group-text">
+                    <i class="fas fa-calendar-day fs-4"></i>
+                </span>
+            </div>
+            {{ actions.frm_help(value) }}
+            {{ actions.frm_errors(value) }}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro frm_column_field_collection(value, class='', class_widget='', col=4) -%}
+    <div class="form-group m-form__group row {{ class }}">
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
+        <div class="col-{{- 12 - col -}}">
+            <ul id="{{ value.vars.id }}" class="list-group"
+                data-prototype="{{ form_widget(value.vars.prototype)|e }}"
+                    {% if value.vars.prototype.vars.name %} data-prototype-name="{{ value.vars.prototype.vars.name }}" {% endif %}
+                data-widget-tags="{{ '<li class="list-group-item"></li>'|e }}">
+                {% for item in value %}
+                    <li class="list-group-item">
+                        {{ form_errors(item) }}
+                        {{ form_widget(item, {attr: {class: '' ~ class_widget} }) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{%- endmacro %}

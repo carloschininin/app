@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
-namespace CarlosChininin\App\Infrastructure\Twig;
+/*
+ * This file is part of the PIDIA
+ * (c) Carlos Chininin <cio@pidia.pe>
+ */
+
+namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 
 use DateTimeInterface;
 use Twig\Extension\RuntimeExtensionInterface;
