@@ -7,7 +7,7 @@ declare(strict_types=1);
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
-namespace CarlosChininin\App\Infrastructure\Symfony;
+namespace CarlosChininin\App\Infrastructure\Symfony\Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
