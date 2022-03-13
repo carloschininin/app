@@ -13,5 +13,10 @@
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateExtension">
             <tag name="twig.extension"/>
         </service>
+
+        <service id="CarlosChininin\Util\Pagination\DoctrinePaginator">
+            <tag name="app.paginator"/>
+        </service>
+        <service id="CarlosChininin\Util\Pagination\PaginatorInterface" alias="CarlosChininin\Util\Pagination\DoctrinePaginator"/>
     </services>
 </container>
