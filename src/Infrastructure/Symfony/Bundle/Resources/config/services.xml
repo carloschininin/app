@@ -5,6 +5,8 @@
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <defaults autowire="true" autoconfigure="true"/>
+        <prototype namespace="CarlosChininin\App\" resource="../../../../../src/*" exclude="../../../../../src/Infrastructure/{Symfony,Entity}"/>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateRuntime">
             <tag name="twig.runtime"/>
         </service>
