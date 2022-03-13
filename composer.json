@@ -12,6 +12,7 @@
   "require": {
     "php": "^8.0",
     "carloschininin/util": "dev-master",
+    "carloschininin/data": "dev-master",
     "doctrine/doctrine-bundle": "^2.5",
     "doctrine/orm": "^2.10",
     "symfony/cache": "^5.4|^6.0",
