@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Repository;
 
+use CarlosChininin\Util\Http\ParamFetcher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -21,7 +22,7 @@ abstract class BaseRepository extends ServiceEntityRepository
 //        return Paginator::create($queryBuilder, $params);
 //    }
 
-    public function filter(array $params, bool $inArray = false): array
+    public function filter(ParamFetcher|array $params, bool $inArray = false): array
     {
         $queryBuilder = $this->filterQuery($params)->getQuery();
 
@@ -51,7 +52,7 @@ abstract class BaseRepository extends ServiceEntityRepository
         }
     }
 
-    abstract public function filterQuery(array $params): QueryBuilder;
+    abstract public function filterQuery(ParamFetcher|array $params): QueryBuilder;
 
     abstract public function allQuery(): QueryBuilder;
 }
