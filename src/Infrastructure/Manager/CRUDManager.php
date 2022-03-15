@@ -11,6 +11,13 @@ namespace CarlosChininin\App\Infrastructure\Manager;
 
 use CarlosChininin\App\Infrastructure\Entity\BaseEntity;
 use CarlosChininin\App\Infrastructure\Repository\BaseRepository;
+use CarlosChininin\Data\Export\ExportExcel;
+use CarlosChininin\Util\Http\ParamFetcher;
+use CarlosChininin\Util\Pagination\DoctrinePaginator;
+use CarlosChininin\Util\Pagination\PaginatedData;
+use CarlosChininin\Util\Pagination\PaginationDto;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 
 class CRUDManager extends BaseManager
@@ -37,7 +44,22 @@ class CRUDManager extends BaseManager
         return true;
     }
 
-    public function addOwner(BaseEntity $entity): void
+    public function paginate(QueryBuilder $dataQuery, int $page, ParamFetcher $params): PaginatedData
+    {
+        $pagination = PaginationDto::create($page, $params->getNullableInt('limit'));
+
+        return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
+    }
+
+    public function export(array $items, array $headers, string $fileName = 'export', array $options = []): Response
+    {
+        $export = new ExportExcel($items, $headers, $options);
+        $export->execute()->headerStyle()->columnAutoSize();
+
+        return $export->download($fileName);
+    }
+
+    protected function addOwner(BaseEntity $entity): void
     {
         if (!method_exists($entity, 'propietario') || !method_exists($entity, 'setPropietario')) {
             return;
