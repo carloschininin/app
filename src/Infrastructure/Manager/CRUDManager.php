@@ -16,7 +16,6 @@ use CarlosChininin\Util\Http\ParamFetcher;
 use CarlosChininin\Util\Pagination\DoctrinePaginator;
 use CarlosChininin\Util\Pagination\PaginatedData;
 use CarlosChininin\Util\Pagination\PaginationDto;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 
@@ -44,9 +43,10 @@ class CRUDManager extends BaseManager
         return true;
     }
 
-    public function paginate(QueryBuilder $dataQuery, int $page, ParamFetcher $params): PaginatedData
+    public function paginate(int $page, ParamFetcher $params): PaginatedData
     {
         $pagination = PaginationDto::create($page, $params->getNullableInt('limit'));
+        $dataQuery = $this->repository->filterQuery($params);
 
         return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
     }
