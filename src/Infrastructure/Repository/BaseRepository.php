@@ -15,13 +15,6 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class BaseRepository extends ServiceEntityRepository
 {
-//    public function findLatest(array $params): Paginator
-//    {
-//        $queryBuilder = $this->filterQuery($params);
-//
-//        return Paginator::create($queryBuilder, $params);
-//    }
-
     public function filter(ParamFetcher|array $params, bool $inArray = false): array
     {
         $queryBuilder = $this->filterQuery($params)->getQuery();

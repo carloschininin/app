@@ -11,4 +11,5 @@ namespace CarlosChininin\App\Infrastructure\Entity;
 
 abstract class BaseEntity
 {
+
 }
