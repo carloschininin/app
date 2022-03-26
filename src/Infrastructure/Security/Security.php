@@ -64,6 +64,7 @@ final class Security
         return $this->isSuperAdmin;
     }
 
+    /** @param Permission[] $permissions */
     public function checkGrantedAccess(array $permissions, string $menuRoute): bool
     {
         if ($this->isSuperAdmin()) {
@@ -82,7 +83,7 @@ final class Security
         }
 
         foreach ($permissions as $permission) {
-            if (\in_array($permission, $auths[$menuRoute], true) || \in_array($permission.'_all', $auths[$menuRoute], true)) {
+            if (\in_array($permission, $auths[$menuRoute], true) || \in_array($permission->value.'_all', $auths[$menuRoute], true)) {
                 return true;
             }
         }
