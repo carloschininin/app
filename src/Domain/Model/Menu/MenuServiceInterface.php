@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Domain\Model\Menu;
 
-interface MenuService
+interface MenuServiceInterface
 {
     public function menusToArray(): array;
 }
