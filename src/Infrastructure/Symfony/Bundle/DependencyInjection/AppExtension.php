@@ -22,7 +22,7 @@ final class AppExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->registerForAutoconfiguration(MenuServiceInterface::class)
-            ->addTag('app.menu_service');
+//        $container->registerForAutoconfiguration(MenuServiceInterface::class)
+//            ->addTag('app.menu_service');
     }
 }
