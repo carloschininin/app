@@ -9,6 +9,9 @@
         <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
             <tag name="app.doctrine_enum_type"/>
         </instanceof>
+        <instanceof id="CarlosChininin\App\Domain\Model\Menu\MenuServiceInterface" autowire="true">
+            <tag name="app.menu_service"/>
+        </instanceof>
         <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateRuntime">
             <tag name="twig.runtime"/>
@@ -21,8 +24,5 @@
             <tag name="app.paginator"/>
         </service>
         <service id="CarlosChininin\Util\Pagination\PaginatorInterface" alias="CarlosChininin\Util\Pagination\DoctrinePaginator"/>
-        <service id="CarlosChininin\App\Domain\Model\Menu\MenuServiceInterface" public="true">
-            <tag name="app.menu_service"/>
-        </service>
     </services>
 </container>
