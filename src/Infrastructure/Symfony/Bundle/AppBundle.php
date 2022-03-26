@@ -9,8 +9,16 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Symfony\Bundle;
 
+use CarlosChininin\App\Infrastructure\Symfony\Bundle\DependencyInjection\RegisterEnumTypePass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class AppBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterEnumTypePass());
+    }
 }
