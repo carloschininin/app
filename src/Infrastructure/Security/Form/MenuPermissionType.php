@@ -20,7 +20,7 @@ use Traversable;
 
 class MenuPermissionType extends AbstractType implements DataMapperInterface
 {
-    public function __construct(private array $menus)
+    public function __construct(private array $menus = [])
     {
     }
 
@@ -69,22 +69,7 @@ class MenuPermissionType extends AbstractType implements DataMapperInterface
 
     private function menus(): array
     {
-//        $menus = $this->entityManager->getRepository(Menu::class)->valuesForSecurityRol();
-//        $data = [];
-//        foreach ($menus as $menu) {
-//            $name = mb_strtoupper($menu['padre_nombre'].' - '.$menu['nombre']);
-//            $data[$name] = $menu['ruteo'];
-//        }
-//
-//        return $data;
-
         return $this->menus;
-
-//        return [
-//            'MENU 1' => 'menu1',
-//            'MENU 2' => 'menu2',
-//            'MENU 3' => 'menu3',
-//        ];
     }
 
     /** @param MenuPermission $viewData */
