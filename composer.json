@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "carloschininin/util": "dev-master",
     "carloschininin/data": "dev-master",
     "doctrine/doctrine-bundle": "^2.5",

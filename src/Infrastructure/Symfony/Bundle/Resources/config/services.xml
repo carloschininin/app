@@ -6,6 +6,10 @@
 
     <services>
         <defaults autowire="true" autoconfigure="true"/>
+        <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
+            <!-- services whose classes are instances of CustomInterface will be tagged automatically -->
+            <tag name="app.doctrine_enum_type"/>
+        </instanceof>
         <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateRuntime">
             <tag name="twig.runtime"/>
