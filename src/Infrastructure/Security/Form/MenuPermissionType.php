@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Security\Form;
 
+use CarlosChininin\App\Domain\Model\Menu\MenuService;
 use CarlosChininin\App\Infrastructure\Security\MenuPermission;
 use CarlosChininin\App\Infrastructure\Security\Permission;
 use Symfony\Component\Form\AbstractType;
@@ -20,7 +21,7 @@ use Traversable;
 
 class MenuPermissionType extends AbstractType implements DataMapperInterface
 {
-    public function __construct(private array $menus = [])
+    public function __construct(private MenuService $menuService)
     {
     }
 
@@ -69,7 +70,7 @@ class MenuPermissionType extends AbstractType implements DataMapperInterface
 
     private function menus(): array
     {
-        return $this->menus;
+        return $this->menuService->menusToArray();
     }
 
     /** @param MenuPermission $viewData */
