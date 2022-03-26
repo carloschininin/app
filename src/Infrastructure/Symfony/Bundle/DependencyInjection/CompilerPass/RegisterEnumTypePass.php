@@ -7,7 +7,7 @@ declare(strict_types=1);
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
-namespace CarlosChininin\App\Infrastructure\Symfony\Bundle\DependencyInjection;
+namespace CarlosChininin\App\Infrastructure\Symfony\Bundle\DependencyInjection\CompilerPass;
 
 use CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

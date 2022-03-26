@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Symfony\Bundle;
 
-use CarlosChininin\App\Infrastructure\Symfony\Bundle\DependencyInjection\RegisterEnumTypePass;
+use CarlosChininin\App\Infrastructure\Symfony\Bundle\DependencyInjection\CompilerPass\RegisterEnumTypePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
