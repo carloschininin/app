@@ -25,6 +25,9 @@ final class MenuPermissionType extends JsonType
     public function convertToPHPValue($value, AbstractPlatform $platform): ?array
     {
         $items = parent::convertToPHPValue($value, $platform);
+        if (null === $items) {
+            return null;
+        }
 
         $data = [];
         foreach ($items as $item) {
