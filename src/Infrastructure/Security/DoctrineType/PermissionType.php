@@ -7,9 +7,10 @@ declare(strict_types=1);
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
-namespace CarlosChininin\App\Infrastructure\Security;
+namespace CarlosChininin\App\Infrastructure\Security\DoctrineType;
 
 use CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType;
+use CarlosChininin\App\Infrastructure\Security\Permission;
 
 final class PermissionType extends AbstractEnumType
 {
