@@ -105,10 +105,14 @@ final class Security
         return false;
     }
 
-    public function denyAccessUnlessGranted(array $permissions, string $menuRoute): void
+    public function denyAccessUnlessGranted(array $permissions, string $menuRoute, ?object $entity = null, string $message = 'Acceso denegado...'): void
     {
-        if (!$this->checkGrantedAccess($permissions, $menuRoute)) {
-            throw new AccessDeniedException();
+        if (!$this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
+            $exception = new AccessDeniedException($message);
+            $exception->setAttributes([$permissions]);
+            $exception->setSubject($menuRoute);
+
+            throw $exception;
         }
     }
 
