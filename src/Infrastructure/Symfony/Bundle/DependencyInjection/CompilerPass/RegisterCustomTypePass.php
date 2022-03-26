@@ -17,9 +17,12 @@ final class RegisterCustomTypePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $typesDefinition = [
-            MenuPermissionType::NAME => ['class' => MenuPermissionType::class],
-        ];
+        $typesDefinition = [];
+        if ($container->hasParameter('doctrine.dbal.connection_factory.types')) {
+            $typesDefinition = $container->getParameter('doctrine.dbal.connection_factory.types');
+        }
+
+        $typesDefinition[MenuPermissionType::NAME] = ['class' => MenuPermissionType::class];
 
         $container->setParameter('doctrine.dbal.connection_factory.types', $typesDefinition);
     }
