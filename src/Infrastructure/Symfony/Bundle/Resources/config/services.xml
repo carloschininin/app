@@ -21,8 +21,6 @@
             <tag name="app.paginator"/>
         </service>
         <service id="CarlosChininin\Util\Pagination\PaginatorInterface" alias="CarlosChininin\Util\Pagination\DoctrinePaginator"/>
-        <service id="CarlosChininin\App\Domain\Model\Menu\MenuServiceInterface">
-            <tag name="app.menu_service"/>
-        </service>
+
     </services>
 </container>
