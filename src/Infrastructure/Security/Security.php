@@ -9,8 +9,9 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Security;
 
-use CarlosChininin\App\Domain\Model\User\AuthUser;
+use CarlosChininin\App\Domain\Model\AuthUser\AuthUser;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class Security
 {
@@ -65,7 +66,7 @@ final class Security
     }
 
     /** @param Permission[] $permissions */
-    public function checkGrantedAccess(array $permissions, string $menuRoute): bool
+    public function checkGrantedAccess(array $permissions, string $menuRoute, ?object $entity = null): bool
     {
         if ($this->isSuperAdmin()) {
             return true;
@@ -78,13 +79,13 @@ final class Security
             return false;
         }
 
-        if (\in_array('master', $auths[$menuRoute], true)) {
+        if (\in_array('master', $auths[$this->menuRoute], true)) {
             return true;
         }
 
         foreach ($permissions as $permission) {
-            if (\in_array($permission->value, $auths[$menuRoute], true)
-                || \in_array($permission->value.'_all', $auths[$menuRoute], true)
+            if ((\in_array($permission->value, $auths[$this->menuRoute], true) && $this->isOwner($entity))
+                || \in_array($permission->value.'_all', $auths[$this->menuRoute], true)
             ) {
                 return true;
             }
@@ -102,5 +103,25 @@ final class Security
         }
 
         return false;
+    }
+
+    public function denyAccessUnlessGranted(array $permissions, string $menuRoute): void
+    {
+        if (!$this->checkGrantedAccess($permissions, $menuRoute)) {
+            throw new AccessDeniedException();
+        }
+    }
+
+    public function isOwner(?object $entity): bool
+    {
+        if (null === $entity) {
+            return false;
+        }
+
+        if (!method_exists($entity, 'owner')) {
+            return false;
+        }
+
+        return $entity->owner()?->getUserIdentifier() === $this->user()->getUserIdentifier();
     }
 }

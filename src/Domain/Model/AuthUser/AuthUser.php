@@ -7,7 +7,7 @@ declare(strict_types=1);
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
-namespace CarlosChininin\App\Domain\Model\User;
+namespace CarlosChininin\App\Domain\Model\AuthUser;
 
 use CarlosChininin\App\Domain\Model\AuthRole\AuthRole;
 use Doctrine\Common\Collections\Collection;
