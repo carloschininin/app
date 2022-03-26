@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Symfony\Bundle\DependencyInjection;
 
-use CarlosChininin\App\Domain\Model\Menu\MenuServiceInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -21,8 +20,5 @@ final class AppExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
-//        $container->registerForAutoconfiguration(MenuServiceInterface::class)
-//            ->addTag('app.menu_service');
     }
 }
