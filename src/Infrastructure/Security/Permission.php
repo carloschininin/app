@@ -11,6 +11,8 @@ namespace CarlosChininin\App\Infrastructure\Security;
 
 enum Permission: string
 {
+    case MASTER = 'master';
+
     case NEW = 'new';
     case LIST = 'list';
     case SHOW = 'show';

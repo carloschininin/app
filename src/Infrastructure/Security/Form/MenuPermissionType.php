@@ -18,8 +18,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Traversable;
 
-final class MenuPermissionType extends AbstractType implements DataMapperInterface
+class MenuPermissionType extends AbstractType implements DataMapperInterface
 {
+    public function __construct(private array $menus)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -28,7 +32,7 @@ final class MenuPermissionType extends AbstractType implements DataMapperInterfa
                 'label' => false,
                 'choices' => $this->menus(),
             ])
-            ->add('atributos', ChoiceType::class, [
+            ->add('attributes', ChoiceType::class, [
                 'required' => false,
                 'label' => false,
                 'choices' => $this->values(),
@@ -74,11 +78,13 @@ final class MenuPermissionType extends AbstractType implements DataMapperInterfa
 //
 //        return $data;
 
-        return [
-            'MENU 1' => 'menu1',
-            'MENU 2' => 'menu2',
-            'MENU 3' => 'menu3',
-        ];
+        return $this->menus;
+
+//        return [
+//            'MENU 1' => 'menu1',
+//            'MENU 2' => 'menu2',
+//            'MENU 3' => 'menu3',
+//        ];
     }
 
     /** @param MenuPermission $viewData */
@@ -86,7 +92,7 @@ final class MenuPermissionType extends AbstractType implements DataMapperInterfa
     {
         $forms = iterator_to_array($forms);
         $forms['menu']->setData($viewData ? $viewData->menu() : '');
-        $forms['atributos']->setData($viewData ? $viewData->atributos() : []);
+        $forms['attributes']->setData($viewData ? $viewData->attributes() : []);
     }
 
     public function mapFormsToData(Traversable $forms, &$viewData)
@@ -94,7 +100,7 @@ final class MenuPermissionType extends AbstractType implements DataMapperInterfa
         $forms = iterator_to_array($forms);
         $viewData = new MenuPermission(
             $forms['menu']->getData(),
-            $forms['atributos']->getData()
+            $forms['attributes']->getData()
         );
     }
 }

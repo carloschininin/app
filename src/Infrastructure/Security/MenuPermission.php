@@ -15,7 +15,7 @@ final class MenuPermission implements JsonSerializable
 {
     public function __construct(
         private string $menu,
-        private array $atributos,
+        private array $attributes
     ) {
     }
 
@@ -24,16 +24,16 @@ final class MenuPermission implements JsonSerializable
         return $this->menu;
     }
 
-    public function atributos(): array
+    public function attributes(): array
     {
-        return $this->atributos;
+        return $this->attributes;
     }
 
     public function jsonSerialize(): array
     {
         return [
             'menu' => $this->menu(),
-            'attr' => $this->atributos(),
+            'attr' => $this->attributes(),
         ];
     }
 }
