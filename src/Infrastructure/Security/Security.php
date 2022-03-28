@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace CarlosChininin\App\Infrastructure\Security;
 
 use CarlosChininin\App\Domain\Model\AuthUser\AuthUser;
+use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -73,6 +75,10 @@ final class Security
         }
 
         $this->menuRoute = $menuRoute ?? $this->menuRoute;
+        if (null === $this->menuRoute) {
+            throw new InvalidArgumentException('especifique el menuRoute');
+        }
+
         $auths = $this->auths();
 
         if (!isset($auths[$menuRoute])) {
@@ -196,6 +202,21 @@ final class Security
         $permission = Permission::byValue($attribute);
 
         return $this->checkGrantedAccess([$permission], $menuRoute, $object);
+    }
+
+    public function filterQuery(QueryBuilder $queryBuilder, ?string $menuRoute = null, bool $forced = false): void
+    {
+        if ($this->isSuperAdmin() && true !== $forced) {
+            return;
+        }
+
+        if ($this->checkGrantedAccess([Permission::LIST_ALL], $menuRoute)) {
+            return;
+        }
+
+        $queryBuilder
+            ->andWhere('owner.id = :ownerId')
+            ->setParameter('ownerId', $this->user()->getId());
     }
 
     private function permissionCheck(Permission $permission, Permission $permissionAll, AuthUser $owner = null): bool

@@ -27,11 +27,6 @@ abstract class WebAuthController extends WebController
         $this->security->denyAccessUnlessGranted($permissions, $menuRoute, $entity, $message);
     }
 
-//    protected function hasAccess(string $attribute, string $subject, object $object = null): bool
-//    {
-//        return $this->security->hasAccess($attribute, $subject, $object);
-//    }
-
     protected function isSuperAdmin(): bool
     {
         return $this->security->isSuperAdmin();

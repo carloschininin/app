@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class AuthUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    abstract public function getId(): ?int;
+
     /** @return Collection|AuthRole[] */
     abstract public function authRoles(): Collection|array;
 }
