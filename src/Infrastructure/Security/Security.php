@@ -66,13 +66,13 @@ final class Security
     }
 
     /** @param Permission[] $permissions */
-    public function checkGrantedAccess(array $permissions, string $menuRoute, ?object $entity = null): bool
+    public function checkGrantedAccess(array $permissions, ?string $menuRoute = null, ?object $entity = null): bool
     {
         if ($this->isSuperAdmin()) {
             return true;
         }
 
-        $this->menuRoute = $menuRoute;
+        $this->menuRoute = $menuRoute ?? $this->menuRoute;
         $auths = $this->auths();
 
         if (!isset($auths[$menuRoute])) {
@@ -105,7 +105,7 @@ final class Security
         return false;
     }
 
-    public function denyAccessUnlessGranted(array $permissions, string $menuRoute, ?object $entity = null, string $message = 'access_denied'): void
+    public function denyAccessUnlessGranted(array $permissions, ?string $menuRoute = null, ?object $entity = null, string $message = 'access_denied'): void
     {
         if (!$this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
             $exception = new AccessDeniedException($message);
