@@ -119,7 +119,7 @@ final class Security
     public function isOwner(?object $entity): bool
     {
         if (null === $entity) {
-            return false;
+            return true;
         }
 
         if (!method_exists($entity, 'owner')) {
