@@ -16,6 +16,7 @@ use CarlosChininin\Util\Http\ParamFetcher;
 use CarlosChininin\Util\Pagination\DoctrinePaginator;
 use CarlosChininin\Util\Pagination\PaginatedData;
 use CarlosChininin\Util\Pagination\PaginationDto;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 
@@ -41,6 +42,11 @@ class CRUDManager extends BaseManager
         $this->repository->remove($entity);
 
         return true;
+    }
+
+    public function list(ParamFetcher $params, bool $inArray = false): array
+    {
+        return $this->repository->filter($params, $inArray);
     }
 
     public function paginate(int $page, ParamFetcher $params): PaginatedData
