@@ -16,7 +16,6 @@ use CarlosChininin\Util\Http\ParamFetcher;
 use CarlosChininin\Util\Pagination\DoctrinePaginator;
 use CarlosChininin\Util\Pagination\PaginatedData;
 use CarlosChininin\Util\Pagination\PaginationDto;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 
@@ -65,7 +64,7 @@ class CRUDManager extends BaseManager
         return $export->download($fileName);
     }
 
-    protected function addOwner(BaseEntity $entity): void
+    protected function addOwner(object $entity): void
     {
         if (!method_exists($entity, 'propietario') || !method_exists($entity, 'setPropietario')) {
             return;
