@@ -12,7 +12,6 @@ namespace CarlosChininin\App\Infrastructure\Security;
 enum Permission: string
 {
     case MASTER = 'master';
-
     case NEW = 'new';
     case LIST = 'list';
     case SHOW = 'show';
@@ -24,7 +23,6 @@ enum Permission: string
     case ENABLE = 'enable';
     case DISABLE = 'disable';
     case DELETE = 'delete';
-
     case LIST_ALL = 'list_all';
     case SHOW_ALL = 'show_all';
     case EDIT_ALL = 'edit_all';
@@ -35,4 +33,15 @@ enum Permission: string
     case ENABLE_ALL = 'enable_all';
     case DISABLE_ALL = 'disable_all';
     case DELETE_ALL = 'delete_all';
+
+    public static function byValue(string $value): ?self
+    {
+        foreach (Permission::cases() as $permision) {
+            if ($permision->value === $value) {
+                return $permision;
+            }
+        }
+
+        return null;
+    }
 }
