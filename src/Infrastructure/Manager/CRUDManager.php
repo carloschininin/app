@@ -27,7 +27,7 @@ class CRUDManager extends BaseManager
     ) {
     }
 
-    public function save(BaseEntity $entity): bool
+    public function save(object $entity): bool
     {
         $this->addOwner($entity);
 
@@ -36,7 +36,7 @@ class CRUDManager extends BaseManager
         return true;
     }
 
-    public function remove(BaseEntity $entity): bool
+    public function remove(object $entity): bool
     {
         $this->repository->remove($entity);
 
