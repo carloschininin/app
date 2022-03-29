@@ -22,22 +22,22 @@ abstract class WebController extends AbstractController
         }
     }
 
-    protected function addSuccess(string $message): void
+    protected function messageSuccess(string $message): void
     {
         $this->addFlash('success', $message);
     }
 
-    protected function addWarning(string $message): void
+    protected function messageWarning(string $message): void
     {
         $this->addFlash('warning', $message);
     }
 
-    protected function addError(string $message): void
+    protected function messageError(string $message): void
     {
         $this->addFlash('danger', $message);
     }
 
-    protected function addInfo(string $message): void
+    protected function messageInfo(string $message): void
     {
         $this->addFlash('info', $message);
     }
