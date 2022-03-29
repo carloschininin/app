@@ -38,4 +38,9 @@ abstract class WebAuthController extends WebController
 
         return parent::render($view, $parameters, $response);
     }
+
+    protected function security(): Security
+    {
+        return $this->security;
+    }
 }
