@@ -20,7 +20,7 @@ abstract class WebAuthController extends WebController
     {
     }
 
-    protected function denyAccess(array $permissions, ?string $menuRoute = null, ?object $entity = null, string $message = 'Acceso denegado...'): void
+    protected function denyAccess(array $permissions, ?object $entity = null, ?string $menuRoute = null, string $message = 'Acceso denegado...'): void
     {
         $menuRoute = $menuRoute ?? self::BASE_ROUTE;
 
