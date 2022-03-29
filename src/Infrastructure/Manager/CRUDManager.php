@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace CarlosChininin\App\Infrastructure\Manager;
 
 use CarlosChininin\App\Infrastructure\Repository\BaseRepository;
+use CarlosChininin\App\Infrastructure\Security\Permission;
 use CarlosChininin\Data\Export\ExportExcel;
 use CarlosChininin\Util\Http\ParamFetcher;
 use CarlosChininin\Util\Pagination\DoctrinePaginator;
@@ -42,15 +43,20 @@ class CRUDManager extends BaseManager
         return true;
     }
 
-    public function list(ParamFetcher $params, bool $inArray = false): array
+    public function dataList(ParamFetcher $params, bool $inArray = false): array
     {
-        return $this->repository->filter($params, $inArray);
+        return $this->repository->filter($params, $inArray, [Permission::LIST_ALL]);
+    }
+
+    public function dataExport(ParamFetcher $params, bool $inArray = false): array
+    {
+        return $this->repository->filter($params, $inArray, [Permission::EXPORT_ALL]);
     }
 
     public function paginate(int $page, ParamFetcher $params): PaginatedData
     {
         $pagination = PaginationDto::create($page, $params->getNullableInt('limit'));
-        $dataQuery = $this->repository->filterQuery($params);
+        $dataQuery = $this->repository->filterQuery($params, [Permission::LIST_ALL]);
 
         return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
     }

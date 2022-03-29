@@ -7,7 +7,7 @@ namespace CarlosChininin\App\Infrastructure\Manager;
 use CarlosChininin\Data\Export\ExportExcel;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ExportManager extends BaseManager
+class ExportManager extends BaseManager
 {
     public function execute(array $items, array $headers, string $fileName = 'export', array $options = []): Response
     {

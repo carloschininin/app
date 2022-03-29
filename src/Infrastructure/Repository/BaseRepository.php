@@ -15,16 +15,16 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class BaseRepository extends ServiceEntityRepository
 {
-    public function filter(ParamFetcher|array $params, bool $inArray = false): array
+    public function filter(ParamFetcher|array $params, bool $inArray = false, array $permissions = []): array
     {
-        $queryBuilder = $this->filterQuery($params)->getQuery();
+        $queryBuilder = $this->filterQuery($params, $permissions)->getQuery();
 
         return true === $inArray ? $queryBuilder->getArrayResult() : $queryBuilder->getResult();
     }
 
-    public function all(bool $inArray = false): array
+    public function all(bool $inArray = false, array $permissions = []): array
     {
-        $queryBuilder = $this->allQuery()->getQuery();
+        $queryBuilder = $this->allQuery($permissions)->getQuery();
 
         return true === $inArray ? $queryBuilder->getArrayResult() : $queryBuilder->getResult();
     }
@@ -45,7 +45,7 @@ abstract class BaseRepository extends ServiceEntityRepository
         }
     }
 
-    abstract public function filterQuery(ParamFetcher|array $params): QueryBuilder;
+    abstract public function filterQuery(ParamFetcher|array $params, array $permissions = []): QueryBuilder;
 
-    abstract public function allQuery(): QueryBuilder;
+    abstract public function allQuery(array $permissions = []): QueryBuilder;
 }
