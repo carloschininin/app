@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Manager;
 
-use CarlosChininin\App\Infrastructure\Entity\BaseEntity;
 use CarlosChininin\App\Infrastructure\Repository\BaseRepository;
 use CarlosChininin\Data\Export\ExportExcel;
 use CarlosChininin\Util\Http\ParamFetcher;

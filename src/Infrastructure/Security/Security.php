@@ -204,13 +204,13 @@ final class Security
         return $this->checkGrantedAccess([$permission], $menuRoute, $object);
     }
 
-    public function filterQuery(QueryBuilder $queryBuilder, ?string $menuRoute = null, bool $forced = false): void
+    public function filterQuery(QueryBuilder $queryBuilder, ?string $menuRoute = null, array $permissions = []): void
     {
-        if ($this->isSuperAdmin() && true !== $forced) {
+        if ($this->isSuperAdmin()) {
             return;
         }
 
-        if ($this->checkGrantedAccess([Permission::LIST_ALL], $menuRoute)) {
+        if ($this->checkGrantedAccess($permissions, $menuRoute)) {
             return;
         }
 
