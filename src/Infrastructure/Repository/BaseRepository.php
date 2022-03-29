@@ -24,7 +24,7 @@ abstract class BaseRepository extends ServiceEntityRepository
 
     public function all(bool $inArray = false, array $permissions = []): array
     {
-        $queryBuilder = $this->allQuery($permissions)->getQuery();
+        $queryBuilder = $this->allQuery()->getQuery();
 
         return true === $inArray ? $queryBuilder->getArrayResult() : $queryBuilder->getResult();
     }
@@ -47,5 +47,5 @@ abstract class BaseRepository extends ServiceEntityRepository
 
     abstract public function filterQuery(ParamFetcher|array $params, array $permissions = []): QueryBuilder;
 
-    abstract public function allQuery(array $permissions = []): QueryBuilder;
+    abstract public function allQuery(): QueryBuilder;
 }
