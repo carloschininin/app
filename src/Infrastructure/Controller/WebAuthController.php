@@ -22,7 +22,7 @@ abstract class WebAuthController extends WebController
 
     protected function denyAccess(array $permissions, ?object $entity = null, ?string $menuRoute = null, string $message = 'Acceso denegado...'): void
     {
-        $menuRoute = $menuRoute ?? self::BASE_ROUTE;
+        $menuRoute = $menuRoute ?? static::BASE_ROUTE;
 
         $this->security->denyAccessUnlessGranted($permissions, $menuRoute, $entity, $message);
     }
