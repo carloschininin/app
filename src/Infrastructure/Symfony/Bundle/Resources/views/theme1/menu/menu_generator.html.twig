@@ -1,0 +1,30 @@
+{% macro generator(menus) %}
+    {% for menu in menus|sort((a, b) => a.rank <=> b.rank ?: a.name <=> b.name) %}
+        {% if menu.submenu | length > 0 %}
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion {% if menu.selected is defined %}hover show{% endif %}">
+                <span class="menu-link">
+                    {% if menu.icon %}
+                        <span class="menu-icon">
+                            <i class="{{ menu.icon }}"></i>
+                        </span>
+                    {% endif %}
+                    <span class="menu-title">{{ menu.name | upper }}</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    {{ _self.generator(menu.submenu) }}
+                </div>
+            </div>
+        {% else %}
+            <div class="menu-item">
+                <a class="menu-link {% if menu.selected is defined %}active{% endif %}" href="{{ path(menu.route) }}">
+                    <span class="menu-bullet">
+                        <span class="bullet bullet-dot"></span>
+                    </span>
+                    <span class="menu-title">{{ menu.name }}</span>
+                    {% if menu.badge %}<span class="badge text-light-primary">{{ menu.badge }}</span>{% endif %}
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
