@@ -12,10 +12,27 @@ namespace CarlosChininin\App\Infrastructure\Security\Menu;
 use CarlosChininin\App\Domain\Model\AuthMenu\AuthMenu;
 use CarlosChininin\App\Domain\Model\AuthRole\AuthRole;
 use CarlosChininin\App\Domain\Model\AuthUser\AuthUser;
+use CarlosChininin\App\Infrastructure\Security\Security;
 
 class MenuBuilder
 {
     public const SUBLEVEL = 'submenu';
+
+    public function __construct(private Security $security)
+    {
+    }
+
+    public function execute(array $menus, string $menuSelected): array
+    {
+        $userMenus = $this->security->isSuperAdmin()
+            ? $this->allMenupaths($menus)
+            : $this->userMenuPaths($this->security->user());
+
+        $buildMenus = $this->buildMenus($menus, $userMenus);
+        $this->selectedMenus($buildMenus, $menuSelected);
+
+        return $buildMenus;
+    }
 
     /** @param AuthMenu[] $menus */
     public function allMenupaths(array $menus): array
