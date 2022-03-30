@@ -7,7 +7,7 @@ declare(strict_types=1);
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
-namespace CarlosChininin\App\Domain\Model\Menu;
+namespace CarlosChininin\App\Domain\Model\AuthMenu;
 
 interface MenuServiceInterface
 {

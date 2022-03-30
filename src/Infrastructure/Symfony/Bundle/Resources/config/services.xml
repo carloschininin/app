@@ -9,7 +9,7 @@
         <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
             <tag name="app.doctrine_enum_type"/>
         </instanceof>
-        <instanceof id="CarlosChininin\App\Domain\Model\Menu\MenuServiceInterface" autowire="true">
+        <instanceof id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" autowire="true">
             <tag name="app.menu_service"/>
         </instanceof>
         <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>

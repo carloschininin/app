@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Security\Form;
 
-use CarlosChininin\App\Domain\Model\Menu\MenuServiceInterface;
+use CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface;
 use CarlosChininin\App\Infrastructure\Security\MenuPermission;
 use CarlosChininin\App\Infrastructure\Security\Permission;
 use Symfony\Component\Form\AbstractType;
