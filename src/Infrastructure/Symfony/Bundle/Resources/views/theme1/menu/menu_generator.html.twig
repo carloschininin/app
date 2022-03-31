@@ -8,7 +8,7 @@
                             <i class="{{ menu.icon }}"></i>
                         </span>
                     {% endif %}
-                    <span class="menu-title">{{ menu.name | upper }}</span>
+                    <span class="menu-title">{{ menu.name | gtrans | upper }}</span>
                     <span class="menu-arrow"></span>
                 </span>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -21,7 +21,7 @@
                     <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                     </span>
-                    <span class="menu-title">{{ menu.name }}</span>
+                    <span class="menu-title">{{ menu.name | gtrans }}</span>
                     {% if menu.badge %}<span class="badge text-light-primary">{{ menu.badge }}</span>{% endif %}
                 </a>
             </div>
