@@ -35,6 +35,10 @@ class TranslationRuntime implements RuntimeExtensionInterface
             return $text;
         }
 
+        if ($text !== ($textTranslated = $this->translator->trans($text))) {
+            return $textTranslated;
+        }
+
         return $this->inCache($source, $target, $text);
     }
 
