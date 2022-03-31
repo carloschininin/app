@@ -22,7 +22,7 @@
         <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
 
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AppExtension">
-            <argument>%locales%</argument>
+            <argument>%app_locales%</argument>
             <tag name="twig.extension"/>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateRuntime">
