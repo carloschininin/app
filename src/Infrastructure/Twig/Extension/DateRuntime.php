@@ -58,4 +58,22 @@ class DateRuntime implements RuntimeExtensionInterface
 
         return '';
     }
+
+    public function dateTimeFilter(?DateTimeInterface $date, ?string $format = 'd-m-Y h:i:s a'): string
+    {
+        if (null === $date) {
+            return '';
+        }
+
+        return $date->format($format);
+    }
+
+    public function dateTimeLargeFilter(?DateTimeInterface $date): string
+    {
+        if (null === $date) {
+            return '';
+        }
+
+        return $this->days[$date->format('w')].', '.$date->format('d').' de '.$this->months[$date->format('n') - 1].' del '.$date->format('Y').', '.$date->format('h:i:s a');
+    }
 }

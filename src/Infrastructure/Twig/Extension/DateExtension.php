@@ -21,6 +21,8 @@ class DateExtension extends AbstractExtension
             new TwigFilter('fecha_media', [DateRuntime::class, 'dateMediumFilter']),
             new TwigFilter('fecha_larga', [DateRuntime::class, 'dateLargeFilter']),
             new TwigFilter('fecha_formato', [DateRuntime::class, 'dateFormatFilter']),
+            new TwigFilter('fecha_hora', [DateRuntime::class, 'dateTimeFilter']),
+            new TwigFilter('fecha_hora_larga', [DateRuntime::class, 'dateTimeLargeFilter']),
         ];
     }
 }
