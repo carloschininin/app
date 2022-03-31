@@ -9,16 +9,17 @@
     </parameters>
 
     <services>
-        <defaults autowire="true" autoconfigure="true"/>
         <defaults autowire="true" autoconfigure="true" public="false">
             <bind key="string $locales">%app_locales%</bind>
         </defaults>
+
         <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
             <tag name="app.doctrine_enum_type"/>
         </instanceof>
         <instanceof id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" autowire="true">
             <tag name="app.menu_service"/>
         </instanceof>
+
         <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
 
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AppExtension">
