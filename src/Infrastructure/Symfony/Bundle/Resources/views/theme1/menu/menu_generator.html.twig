@@ -1,5 +1,5 @@
 {% macro generator(menus) %}
-    {% for menu in menus|sort((a, b) => a.rank <=> b.rank ?: a.name <=> b.name) %}
+    {% for menu in menus|sort((a, b) => a.ranking <=> b.ranking ?: a.name <=> b.name) %}
         {% if menu.submenu | length > 0 %}
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion {% if menu.selected is defined %}hover show{% endif %}">
                 <span class="menu-link">
