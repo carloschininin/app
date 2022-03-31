@@ -19,7 +19,7 @@ abstract class AuthMenu
 
     abstract public function getIcon(): ?string;
 
-    abstract public function getRank(): ?int;
+    abstract public function getRanking(): ?int;
 
     abstract public function getParent(): ?self;
 
@@ -32,7 +32,7 @@ abstract class AuthMenu
             'name' => $this->getName(),
             'route' => $this->getRoute(),
             'icon' => $this->getIcon(),
-            'rank' => $this->getRank(),
+            'ranking' => $this->getRanking(),
             'badge' => $this->getBadge(),
         ];
     }
