@@ -1,7 +1,7 @@
-{% macro show(paginator, route, info = true) -%}
+{% macro show(paginator, route, hasInfo = true) -%}
     {% if paginator is not null and paginator.hasToPaginate %}
         <div class="row">
-            {% if info %}
+            {% if hasInfo %}
                 <div class="col-sm-auto">
                     <span class="">
                         {% set total = (paginator.currentPage-1) * paginator.pageSize + 1 %}
@@ -63,23 +63,33 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro pager(paginator, route) -%}
+{% macro pager(paginator, route, hasSearch = true) -%}
     {% import _self as paginations %}
-    {% if paginator is not null and paginator.hasToPaginate %}
-        <div class="row pb-2">
-            <div class="col-sm-auto">
-                {% if default_results_per_page is defined %}
-                    <label for="filter_size" class="d-none"></label>
-                    <select id="filter_size" class="form-control form-select" name="n">
-                        {% for key,value in default_results_per_page %}
-                            <option value="{{ value }}" {% if app.request.get('n') == value %} selected {% endif %}>{{key}} {{ 'registros' | gtrans }}</option>
-                        {% endfor %}
-                    </select>
-                {% endif %}
-            </div>
-            <div class="col">
-                {{ paginations.show(paginator,route, false) }}
-            </div>
+    <div class="row pb-2">
+        <div class="col-sm-auto">
+            {% if default_results_per_page is defined %}
+                <label for="filter_size" class="d-none"></label>
+                <select id="filter_size" class="form-control form-select form-select-sm" name="limit">
+                    {% for key,value in default_results_per_page %}
+                        <option value="{{ value }}" {% if app.request.get('limit') == value %} selected {% endif %}>{{key}} {{ 'registros' | gtrans }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
         </div>
-    {% endif %}
+        {% if hasSearch %}
+            <div class="col-sm-auto">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Buscar"
+                           aria-label="Recipient's username" aria-describedby="basic-addon2"
+                           name="b" id="filter_text" value="{{ app.request.get('b') }}"/>
+                    <span class="input-group-text" id="filter_text_icon">
+                        <i class="fas fa-search fs-4"></i>
+                    </span>
+                </div>
+            </div>
+        {% endif %}
+        <div class="col">
+            {{ paginations.show(paginator,route, false) }}
+        </div>
+    </div>
 {%- endmacro %}

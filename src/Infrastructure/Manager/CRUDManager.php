@@ -55,7 +55,8 @@ class CRUDManager extends BaseManager
 
     public function paginate(int $page, ParamFetcher $params): PaginatedData
     {
-        $pagination = PaginationDto::create($page, $params->getNullableInt('limit'));
+        $limit = $params->getNullableInt('limit') ?? $params->getNullableInt('n');
+        $pagination = PaginationDto::create($page, $limit);
         $dataQuery = $this->repository->filterQuery($params, [Permission::LIST_ALL]);
 
         return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
