@@ -26,6 +26,7 @@
             <argument type="service" id="router.default"/>
             <argument>%app_locales%</argument>
             <argument>%locale%</argument>
+            <tag name="kernel.event_subscriber" event="kernel.request"/>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AppExtension">
             <argument>%app_locales%</argument>
