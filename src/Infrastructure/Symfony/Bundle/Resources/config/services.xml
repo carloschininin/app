@@ -20,7 +20,7 @@
             <tag name="app.menu_service"/>
         </instanceof>
 
-        <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
+        <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity,Security/Form/MenuPermissionType.php}"/>
 
         <service id="CarlosChininin\App\Infrastructure\EventSubscriber\RedirectToPreferredLocaleSubscriber">
             <argument type="service" id="router.default"/>
@@ -63,6 +63,8 @@
         <service id="CarlosChininin\Util\Pagination\DoctrinePaginator">
             <tag name="app.paginator"/>
         </service>
+
+<!--        <service id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" alias="app.menu_service" />-->
         <service id="CarlosChininin\Util\Pagination\PaginatorInterface" alias="CarlosChininin\Util\Pagination\DoctrinePaginator"/>
     </services>
 </container>
