@@ -19,6 +19,9 @@
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateExtension">
             <tag name="twig.extension"/>
         </service>
+        <service id="CarlosChininin\App\Infrastructure\Twig\Extension\PaginationExtension">
+            <tag name="twig.extension"/>
+        </service>
 
         <service id="CarlosChininin\Util\Pagination\DoctrinePaginator">
             <tag name="app.paginator"/>
