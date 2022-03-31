@@ -10,8 +10,9 @@ declare(strict_types=1);
 namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Extension\RuntimeExtensionInterface;
 
-final class StateRuntime
+final class StateRuntime implements RuntimeExtensionInterface
 {
     public function __construct(private TranslatorInterface $translator)
     {

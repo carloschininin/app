@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe4c8e33cfa8bbecf5d1a1125bfb2cd5",
+    "content-hash": "ee57a7443f7a85f490a9d9780f7bd37d",
     "packages": [
         {
             "name": "carloschininin/data",
@@ -2140,6 +2140,75 @@
                 "source": "https://github.com/php-fig/simple-cache/tree/master"
             },
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "statickidz/php-google-translate-free",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/statickidz/php-google-translate-free.git",
+                "reference": "29dc0b0110fcb78ba51fc2d983d638dbdd7fa439"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/statickidz/php-google-translate-free/zipball/29dc0b0110fcb78ba51fc2d983d638dbdd7fa439",
+                "reference": "29dc0b0110fcb78ba51fc2d983d638dbdd7fa439",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": ">=4.8",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Statickidz\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Adrián Barrio Andrés",
+                    "email": "statickidz@gmail.com",
+                    "homepage": "https://statickidz.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Paris Niarfe Baltazar Salguero",
+                    "email": "sieg.sb@gmail.com",
+                    "homepage": "http://www.pbaltazar.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Google Translate Free library for PHP",
+            "homepage": "https://github.com/statickidz/php-google-translate-free/",
+            "keywords": [
+                "api",
+                "free",
+                "google",
+                "siegsb",
+                "statickidz",
+                "translate",
+                "translator"
+            ],
+            "support": {
+                "issues": "https://github.com/statickidz/php-google-translate-free/issues",
+                "source": "https://github.com/statickidz/php-google-translate-free/releases"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/statickidz",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-04-12T14:59:49+00:00"
         },
         {
             "name": "symfony/cache",
@@ -5793,8 +5862,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "carloschininin/util": 20,
-        "carloschininin/data": 20
+        "carloschininin/data": 20,
+        "carloschininin/util": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
