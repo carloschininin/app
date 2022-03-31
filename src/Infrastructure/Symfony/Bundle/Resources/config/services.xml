@@ -7,7 +7,7 @@
     <services>
         <defaults autowire="true" autoconfigure="true"/>
         <defaults autowire="true" autoconfigure="true" public="false">
-            <bind key="array $locales">%app_locales%</bind>
+            <bind key="string $locales">%app_locales%</bind>
         </defaults>
         <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
             <tag name="app.doctrine_enum_type"/>
