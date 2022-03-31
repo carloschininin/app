@@ -4,13 +4,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
         https://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="app_locales" type="string">es|en</parameter>
-    </parameters>
+<!--    <parameters>-->
+<!--        <parameter key="app_locales" type="string">es|en</parameter>-->
+<!--    </parameters>-->
 
     <services>
         <defaults autowire="true" autoconfigure="true" public="false">
-            <bind key="string $locales">%app_locales%</bind>
+<!--            <bind key="string $locales">%app_locales%</bind>-->
         </defaults>
 
         <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
