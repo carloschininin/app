@@ -28,7 +28,7 @@
             <argument key="$defaultLocale">%locale%</argument>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AppExtension">
-            <argument>%app_locales%</argument>
+            <argument key="$locales">%app_locales%</argument>
             <tag name="twig.extension"/>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateRuntime">
