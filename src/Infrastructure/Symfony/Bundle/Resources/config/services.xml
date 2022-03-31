@@ -24,8 +24,8 @@
 
         <service id="CarlosChininin\App\Infrastructure\EventSubscriber\RedirectToPreferredLocaleSubscriber">
             <argument key="$urlGenerator" type="service" id="router.default"/>
-            <argument key="$locales" type="string">%app_locales%</argument>
-            <argument key="$defaultLocale" type="string">%locale%</argument>
+            <argument key="$locales">%app_locales%</argument>
+            <argument key="$defaultLocale">%locale%</argument>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AppExtension">
             <argument>%app_locales%</argument>
