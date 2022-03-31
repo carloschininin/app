@@ -13,6 +13,10 @@
             <tag name="app.menu_service"/>
         </instanceof>
         <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
+
+        <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AppExtension">
+            <tag name="twig.extension"/>
+        </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\DateRuntime">
             <tag name="twig.runtime"/>
         </service>
@@ -20,6 +24,18 @@
             <tag name="twig.extension"/>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\PaginationExtension">
+            <tag name="twig.extension"/>
+        </service>
+        <service id="CarlosChininin\App\Infrastructure\Twig\Extension\TextExtension">
+            <tag name="twig.extension"/>
+        </service>
+        <service id="CarlosChininin\App\Infrastructure\Twig\Extension\MathExtension">
+            <tag name="twig.extension"/>
+        </service>
+        <service id="CarlosChininin\App\Infrastructure\Twig\Extension\StateRuntime">
+            <tag name="twig.runtime"/>
+        </service>
+        <service id="CarlosChininin\App\Infrastructure\Twig\Extension\StateExtension">
             <tag name="twig.extension"/>
         </service>
 
