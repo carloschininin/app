@@ -11,7 +11,7 @@
             {% endif %}
             <div class="col">
                 {% set routeParams = app.request.query.all %}
-                <ul class="pagination pagination-sm float-sm-end">
+                <ul class="pagination pagination-sm float-sm-end float-sm-right">
                     <li class="page-item">
                         <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: 1})) }}">
                             <i class="fa fa-angle-double-left kt-font-brand"></i>
