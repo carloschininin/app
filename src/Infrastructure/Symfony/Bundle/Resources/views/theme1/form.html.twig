@@ -9,6 +9,14 @@
     {{ form_end(form) }}
 {%- endmacro %}
 
+{% macro btn_save(title, attributes='') %}
+    <button class="btn btn-warning" {{ attributes }}>
+        <span>
+            <i class="fa fa-save"></i> {{ title |gtrans }}
+        </span>
+    </button>
+{% endmacro %}
+
 {% macro frm_field(value, class='', class_widget='') -%}
     <div class="form-group m-form__group row {{ class }} pb-1">
         {{ form_label(value,null, {label_attr: {class: 'col-form-label col-md-4 col-sm-5'} }) }}
@@ -235,3 +243,15 @@
         </div>
     </div>
 {%- endmacro %}
+
+{% macro frm_column_btn(label, class='', attributes = '', cols=4) %}
+    {% import _self as actions %}
+    <div class="form-group  row p-1 {{ class }}">
+        {% if cols > 0 %}
+            <div class="col-sm-{{ cols }}"></div>
+        {% endif %}
+        <div class="col-sm-{{ 12-cols }}">
+            {{ actions.btn_save(label, attributes) }}
+        </div>
+    </div>
+{% endmacro %}
