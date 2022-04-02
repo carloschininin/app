@@ -64,19 +64,6 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro tbl_tr_money(label, value, nullable=true, value2=null,value3=null,value4=null) %}
-    {%- if value is not null or nullable == true -%}
-        {% import _self as actions %}
-        <tr>
-            <th>{{ label }}</th>
-            <td>{{ value | money }}</td>
-            {% if value2 %}<td>{{ value2 | money }}</td>{% endif %}
-            {% if value3 %}<td>{{ value3 | money }}</td>{% endif %}
-            {% if value4 %}<td>{{ value4 | money }}</td>{% endif %}
-        </tr>
-    {%- endif -%}
-{% endmacro %}
-
 {% macro tbl_th(nullable=true, head1=null, head2=null, head3=null, head4=null) %}
     {%- if head1 is not null or nullable == true -%}
         {% import _self as actions %}
