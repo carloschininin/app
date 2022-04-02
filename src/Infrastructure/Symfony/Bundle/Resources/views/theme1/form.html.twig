@@ -194,19 +194,29 @@
     </div>
 {% endmacro %}
 
-{% macro frm_column_field(value, class='', class_widget='', col=4) -%}
-    <div class="form-group m-form__group row {{ class }}">
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
-        <div class="col-{{- 12 - col -}}">
-            {{ form_widget(value, {attr: {class: 'form-control ' ~ class_widget} }) }}
+{% macro frm_column_field(value, class='', class_widget='', col=4) %}
+    {% import _self as actions %}
+    <div class="form-group row mb-1 p-1 {{ class }} {{ actions.frm_errors_class(value) }}">
+        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}
+        <div class="col-sm-{{ 12-col }} col-8">
+            {{ form_widget(value, {attr: {class: 'form-control ' ~ class_widget ~ actions.frm_errors_class(value)} }) }}
+            {{ actions.frm_help(value) }}
+            {{ actions.frm_errors(value) }}
         </div>
     </div>
-{%- endmacro %}
+{% endmacro %}
 
-{% macro frm_column_field_select(value, class='', class_widget='', col=4) -%}
+{% macro frm_column_field_select(value, class='', class_widget='', col=4, placeholder='Seleccione...') %}
     {% import _self as actions %}
-    {{ actions.frm_column_field(value, class, 'form-select js-select2 '~class_widget, col) }}
-{%- endmacro %}
+    <div class="form-group row mb-1 p-1 {{ class }} {{ actions.frm_errors_class(value) }}">
+        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}
+        <div class="col-sm-{{ 12-col }} col-8">
+            {{ form_widget(value, {attr: {class: 'js-select2 form-control form-select' ~ class_widget ~ actions.frm_errors_class(value), 'data-placeholder': placeholder | gtrans} }) }}
+            {{ actions.frm_help(value) }}
+            {{ actions.frm_errors(value) }}
+        </div>
+    </div>
+{% endmacro %}
 
 {% macro frm_column_field_date(value, class='', class_widget='', col=4) %}
     {% import _self as actions %}
