@@ -17,6 +17,43 @@
     </button>
 {% endmacro %}
 
+{#{%- macro frm_label(value, class=null) -%}#}
+{#    {% set label = value.vars.label %}#}
+{#    {% if label is not same as(false) -%}#}
+{#        {% set label_attr = {} %}#}
+
+{#        {% if not value.vars.compound -%}#}
+{#            {% set label_attr = label_attr|merge({'for': value.vars.id}) %}#}
+{#        {%- endif -%}#}
+{#        {% if class is null %} {% set class = _class_horizontal_label %} {% endif %}#}
+{#        {% set label_attr = label_attr|merge({'class': 'col-form-label ' ~ class }) %}#}
+{#        {% if value.vars.required -%}#}
+{#            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}#}
+{#        {%- endif -%}#}
+{#        {% if value.vars.label is empty -%}#}
+{#            {%- if value.vars.label_format is not empty -%}#}
+{#                {% set label = label_format|replace({#}
+{#                    '%name%': value.vars.name,#}
+{#                    '%id%': value.vars.id,#}
+{#                }) %}#}
+{#            {%- else -%}#}
+{#                {% set label = value.vars.name|humanize %}#}
+{#            {%- endif -%}#}
+{#        {%- endif -%}#}
+
+{#        <label {% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>#}
+{#            {{ label | gtrans }}#}
+{#            {% if value.vars.popover ?? false %}#}
+{#                <span class="float-right">#}
+{#                    &nbsp;#}
+{#                    <i class="fa fa-question-circle-o text-primary" data-toggle="popover" data-placement="top"#}
+{#                       data-content="{{ value.vars.popover }}"></i>#}
+{#                </span>#}
+{#            {% endif %}#}
+{#        </label>#}
+{#    {% endif %}#}
+{#{%- endmacro -%}#}
+
 {% macro frm_field(value, class='', class_widget='') -%}
     <div class="form-group m-form__group row {{ class }} pb-1">
         {{ form_label(value,null, {label_attr: {class: 'col-form-label col-md-4 col-sm-5'} }) }}
@@ -197,7 +234,8 @@
 {% macro frm_column_field(value, class='', class_widget='', col=4) %}
     {% import _self as actions %}
     <div class="form-group row mb-1 p-1 {{ class }} {{ actions.frm_errors_class(value) }}">
-        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}
+{#        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}#}
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
         <div class="col-sm-{{ 12-col }} col-8">
             {{ form_widget(value, {attr: {class: 'form-control ' ~ class_widget ~ actions.frm_errors_class(value)} }) }}
             {{ actions.frm_help(value) }}
@@ -209,7 +247,8 @@
 {% macro frm_column_field_select(value, class='', class_widget='', col=4, placeholder='Seleccione...') %}
     {% import _self as actions %}
     <div class="form-group row mb-1 p-1 {{ class }} {{ actions.frm_errors_class(value) }}">
-        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}
+{#        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}#}
+        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
         <div class="col-sm-{{ 12-col }} col-8">
             {{ form_widget(value, {attr: {class: 'js-select2 form-control form-select' ~ class_widget ~ actions.frm_errors_class(value), 'data-placeholder': placeholder | gtrans} }) }}
             {{ actions.frm_help(value) }}
