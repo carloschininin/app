@@ -16,7 +16,7 @@
         <instanceof id="CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType" autowire="true">
             <tag name="app.doctrine_enum_type"/>
         </instanceof>
-        <instanceof id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" autowire="true">
+        <instanceof id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" autowire="true" public="true">
             <tag name="app.menu_service"/>
         </instanceof>
 
@@ -64,7 +64,7 @@
             <tag name="app.paginator"/>
         </service>
 
-<!--        <service id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" alias="app.menu_service" />-->
+        <service id="CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface" alias="app.menu_service" />
         <service id="CarlosChininin\Util\Pagination\PaginatorInterface" alias="CarlosChininin\Util\Pagination\DoctrinePaginator"/>
     </services>
 </container>
