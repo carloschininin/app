@@ -20,7 +20,8 @@
             <tag name="app.menu_service"/>
         </instanceof>
 
-        <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity,Security/Form/MenuPermissionType.php}"/>
+<!--        <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity,Security/Form/MenuPermissionType.php}"/>-->
+        <prototype namespace="CarlosChininin\App\" resource="../../../../../../src/*" exclude="../../../../../../src/Infrastructure/{Symfony,Entity}"/>
 
         <service id="CarlosChininin\App\Infrastructure\EventSubscriber\RedirectToPreferredLocaleSubscriber">
             <argument type="service" id="router.default"/>
