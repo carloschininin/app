@@ -55,7 +55,8 @@ final class RedirectToPreferredLocaleSubscriber implements EventSubscriberInterf
         if (!$event->isMainRequest() || '/' !== $request->getPathInfo()) {
             return;
         }
-        if (0 === mb_stripos($request->headers->get('referer'), $request->getSchemeAndHttpHost())) {
+        $referer = $request->headers->get('referer');
+        if (null === $referer || 0 === mb_stripos($referer, $request->getSchemeAndHttpHost())) {
             return;
         }
 
