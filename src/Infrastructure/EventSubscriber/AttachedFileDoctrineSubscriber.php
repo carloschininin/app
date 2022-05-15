@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the PIDIA
+ * (c) Carlos Chininin <cio@pidia.pe>
+ */
+
 namespace CarlosChininin\App\Infrastructure\EventSubscriber;
 
 use CarlosChininin\App\Domain\Model\AttachedFile\AttachedFile;
@@ -21,7 +26,7 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
     {
         return [
             Events::prePersist,
-            Events::preUpdate,
+            Events::postUpdate,
             Events::preRemove,
         ];
     }
@@ -33,7 +38,7 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
         $this->uploadFile($entity);
     }
 
-    public function preUpdate(LifecycleEventArgs $args): void
+    public function postUpdate(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 
@@ -61,9 +66,12 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
         $file = $entity->file();
 
         if ($file instanceof UploadedFile) {
-            $entity->setName($file->getClientOriginalName());
+            $originalFilename = pathinfo($file->getClientOriginalName(), \PATHINFO_FILENAME);
+            $entity->setName($originalFilename);
+
             $secure = $this->fileUploader->upload($file, $entity->path());
             $entity->setSecure($secure);
+
             $this->fileUploader->remove($entity->previousPath());
         }
     }
