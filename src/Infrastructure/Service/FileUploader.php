@@ -9,12 +9,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
-    private string $attachmentDirectory;
     private string $path = '';
 
-    public function __construct($attachmentDirectory)
-    {
-        $this->attachmentDirectory = $attachmentDirectory;
+    public function __construct(
+        private readonly string $publicDirectory,
+        private readonly string $attachmentDirectory
+    ) {
     }
 
     public function upload(UploadedFile $file, string $path = ''): string
@@ -57,6 +57,6 @@ class FileUploader
 
     public function getTargetDirectory(): string
     {
-        return $this->attachmentDirectory.$this->path;
+        return $this->publicDirectory.$this->attachmentDirectory.$this->path;
     }
 }
