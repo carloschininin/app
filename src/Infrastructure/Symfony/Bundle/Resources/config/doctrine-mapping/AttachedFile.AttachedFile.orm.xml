@@ -11,7 +11,7 @@
 
         <field name="name" column="name" length="255" />
 
-        <field name="secure" column="secure" length="40" unique="true" />
+        <field name="secure" column="secure" length="48" unique="true" />
 
         <field name="folder" column="folder" length="255" nullable="true" />
     </entity>
