@@ -34,14 +34,14 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
 
     public function prePersist(LifecycleEventArgs $args): void
     {
-        $entity = $args->getObject();
+        $entity = $args->getEntity();
 
         $this->uploadFile($entity);
     }
 
     public function preUpdate(PreUpdateEventArgs $args): void
     {
-        $entity = $args->getObject();
+        $entity = $args->getEntity();
 
         if (!$entity instanceof AttachedFile) {
             return;
@@ -53,7 +53,7 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
 
     public function preRemove(LifecycleEventArgs $args): void
     {
-        $entity = $args->getObject();
+        $entity = $args->getEntity();
 
         $this->removeFile($entity);
     }
