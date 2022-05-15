@@ -42,6 +42,7 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
             return;
         }
 
+        dd($entity->file());
         $entity->setPreviousPath($entity->path());
         $this->uploadFile($entity);
     }
