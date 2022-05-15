@@ -10,10 +10,9 @@ declare(strict_types=1);
 namespace CarlosChininin\App\Infrastructure\EventSubscriber;
 
 use CarlosChininin\App\Domain\Model\AttachedFile\AttachedFile;
+use CarlosChininin\App\Domain\Model\AttachedFile\Event\AttachedFilePersistEvent;
 use CarlosChininin\App\Infrastructure\Service\FileUploader;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Events;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
@@ -22,40 +21,45 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
     {
     }
 
-    public function getSubscribedEvents(): array
+    public static function getSubscribedEvents(): array
     {
         return [
-            Events::prePersist,
-            Events::postUpdate,
-            Events::preRemove,
+            AttachedFilePersistEvent::NAME => 'onPersist',
         ];
     }
 
-    public function prePersist(LifecycleEventArgs $args): void
+    public function onPersist(AttachedFilePersistEvent $event): void
     {
-        $entity = $args->getEntity();
+        $attachedFile = $event->attachedFile();
 
-        $this->uploadFile($entity);
+        $this->uploadFile($attachedFile);
     }
 
-    public function postUpdate(LifecycleEventArgs $args): void
-    {
-        $entity = $args->getEntity();
-
-        if (!$entity instanceof AttachedFile) {
-            return;
-        }
-
-        $entity->setPreviousPath($entity->path());
-        $this->uploadFile($entity);
-    }
-
-    public function preRemove(LifecycleEventArgs $args): void
-    {
-        $entity = $args->getEntity();
-
-        $this->removeFile($entity);
-    }
+//    public function prePersist(LifecycleEventArgs $args): void
+//    {
+//        $entity = $args->getEntity();
+//
+//        $this->uploadFile($entity);
+//    }
+//
+//    public function preUpdate(LifecycleEventArgs $args): void
+//    {
+//        $entity = $args->getEntity();
+//
+//        if (!$entity instanceof AttachedFile) {
+//            return;
+//        }
+//
+//        $entity->setPreviousPath($entity->path());
+//        $this->uploadFile($entity);
+//    }
+//
+//    public function preRemove(LifecycleEventArgs $args): void
+//    {
+//        $entity = $args->getEntity();
+//
+//        $this->removeFile($entity);
+//    }
 
     private function uploadFile($entity): void
     {
