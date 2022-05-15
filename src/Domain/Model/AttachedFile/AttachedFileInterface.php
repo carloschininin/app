@@ -8,7 +8,7 @@ interface AttachedFileInterface
 {
     public function id(): ?int;
 
-    public function name(): string;
+    public function name(): ?string;
 
     public function secure(): ?string;
 

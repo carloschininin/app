@@ -10,7 +10,7 @@ class AttachedFile implements AttachedFileInterface
 {
     protected ?int $id = null;
 
-    protected string $name;
+    protected ?string $name;
 
     protected ?string $secure = null;
 
@@ -25,12 +25,12 @@ class AttachedFile implements AttachedFileInterface
         return $this->id;
     }
 
-    public function name(): string
+    public function name(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -62,7 +62,10 @@ class AttachedFile implements AttachedFileInterface
 
     public function setFile(?File $file): void
     {
-        $this->file = $file;
+        if (null !== $file) {
+            $this->file = $file;
+            $this->name = null;
+        }
     }
 
     public function previousPath(): ?string
