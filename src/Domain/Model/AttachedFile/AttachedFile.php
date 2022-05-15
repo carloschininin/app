@@ -74,4 +74,9 @@ class AttachedFile implements AttachedFileInterface
     {
         $this->previousPath = $previousPath;
     }
+
+    public function path(): string
+    {
+        return $this->folder().'/'.$this->secure();
+    }
 }
