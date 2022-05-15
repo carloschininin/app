@@ -2,21 +2,26 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the PIDIA
+ * (c) Carlos Chininin <cio@pidia.pe>
+ */
+
 namespace CarlosChininin\App\Domain\Model\AttachedFile;
 
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AttachedFile implements AttachedFileInterface
 {
     protected ?int $id = null;
 
-    protected ?string $name;
+    protected string $name;
 
     protected ?string $secure = null;
 
     protected ?string $folder = null;
 
-    protected ?File $file = null;
+    protected ?UploadedFile $file = null;
 
     protected ?string $previousPath = null;
 
@@ -25,12 +30,12 @@ class AttachedFile implements AttachedFileInterface
         return $this->id;
     }
 
-    public function name(): ?string
+    public function name(): string
     {
         return $this->name;
     }
 
-    public function setName(?string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -55,16 +60,16 @@ class AttachedFile implements AttachedFileInterface
         $this->folder = $folder;
     }
 
-    public function file(): ?File
+    public function file(): ?UploadedFile
     {
         return $this->file;
     }
 
-    public function setFile(?File $file): void
+    public function setFile(?UploadedFile $file): void
     {
         if (null !== $file) {
+            $this->setName(pathinfo($file->getClientOriginalName(), \PATHINFO_FILENAME));
             $this->file = $file;
-            $this->name = null;
         }
     }
 

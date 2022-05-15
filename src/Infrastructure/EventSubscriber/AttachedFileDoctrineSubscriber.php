@@ -67,9 +67,6 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
         $file = $entity->file();
 
         if ($file instanceof UploadedFile) {
-            $originalFilename = pathinfo($file->getClientOriginalName(), \PATHINFO_FILENAME);
-            $entity->setName($originalFilename);
-
             $secure = $this->fileUploader->upload($file, $entity->path());
             $entity->setSecure($secure);
 
