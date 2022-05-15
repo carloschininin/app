@@ -9,19 +9,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
-    private string $path = '';
-
     public function __construct(
         private readonly string $publicDirectory,
         private readonly string $attachmentDirectory
     ) {
     }
 
-    public function upload(UploadedFile $file, ?string $path = null): string
+    public function upload(UploadedFile $file): string
     {
         $extension = $file->getClientOriginalExtension();
         $secure = sha1(uniqid((string) mt_rand(), true)).'.'.$extension;
-        $this->path = $path;
 
 //        try {
             $file->move($this->getTargetDirectory(), $secure);
@@ -57,6 +54,6 @@ class FileUploader
 
     public function getTargetDirectory(): string
     {
-        return $this->publicDirectory.$this->attachmentDirectory.$this->path;
+        return $this->publicDirectory.$this->attachmentDirectory;
     }
 }

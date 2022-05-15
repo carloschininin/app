@@ -67,7 +67,7 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
         $file = $entity->file();
 
         if ($file instanceof UploadedFile) {
-            $secure = $this->fileUploader->upload($file, $entity->path());
+            $secure = $this->fileUploader->upload($file);
             $entity->setSecure($secure);
 
             $this->fileUploader->remove($entity->previousPath());
