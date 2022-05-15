@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="CarlosChininin\App\Domain\Model\AttachedFile">
+    <mapped-superclass name="CarlosChininin\App\Domain\Model\AttachedFile\AttachedFile">
         <field name="name" column="name" type="string" length="255" />
 
         <field name="secure" column="secure" type="string" length="50" unique="true" />
