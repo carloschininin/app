@@ -23,6 +23,6 @@ class AttachedFileExtension extends AbstractExtension
 
     public function webpath(AttachedFile $file): string
     {
-        return $this->attachmentDirectory.'/'.$file->path();
+        return $this->attachmentDirectory.$file->path();
     }
 }
