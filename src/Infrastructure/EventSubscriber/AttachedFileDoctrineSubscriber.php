@@ -14,6 +14,7 @@ use CarlosChininin\App\Infrastructure\Service\FileUploader;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Doctrine\Persistence\Event\PreUpdateEventArgs;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
@@ -38,7 +39,7 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
         $this->uploadFile($entity);
     }
 
-    public function preUpdate(LifecycleEventArgs $args): void
+    public function preUpdate(PreUpdateEventArgs $args): void
     {
         $entity = $args->getObject();
 
