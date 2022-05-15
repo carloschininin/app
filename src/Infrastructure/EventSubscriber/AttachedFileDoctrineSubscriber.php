@@ -67,10 +67,12 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
         $file = $entity->file();
 
         if ($file instanceof UploadedFile) {
+            $previusPath = $entity->path();
+
             $secure = $this->fileUploader->upload($file);
             $entity->setSecure($secure);
 
-            $this->fileUploader->remove($entity->previousPath());
+            $this->fileUploader->remove($previusPath);
         }
     }
 
@@ -80,7 +82,6 @@ class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $nombre = $entity->path();
-        $this->fileUploader->remove($nombre);
+        $this->fileUploader->remove($entity->path());
     }
 }

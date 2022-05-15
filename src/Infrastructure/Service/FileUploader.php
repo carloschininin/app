@@ -20,30 +20,28 @@ class FileUploader
         $extension = $file->getClientOriginalExtension();
         $secure = sha1(uniqid((string) mt_rand(), true)).'.'.$extension;
 
-//        try {
+        try {
             $file->move($this->getTargetDirectory(), $secure);
-//        } catch (FileException) {
-//        }
+        } catch (FileException) {
+        }
 
         return $secure;
     }
 
-    public function remove(?string $nombre): void
+    public function remove(?string $filename): void
     {
-        if (null === $nombre || '' === trim($nombre)) {
+        if (null === $filename) {
             return;
         }
 
-        $file = $this->getTargetDirectory().$nombre;
+        $filePath = $this->getTargetDirectory().$filename;
 
-        if (file_exists($file)) {
-            unlink($file);
-        }
+        $this->removePath($filePath);
     }
 
     public function removePath(?string $filePath): void
     {
-        if (null === $filePath || '' === trim($filePath)) {
+        if (null === $filePath) {
             return;
         }
 
