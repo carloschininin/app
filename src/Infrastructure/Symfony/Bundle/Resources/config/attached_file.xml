@@ -17,9 +17,5 @@
             <argument>%attachment_directory%</argument>
             <tag name="twig.extension"/>
         </service>
-<!--        <service id="CarlosChininin\App\Infrastructure\EventSubscriber\AttachedFileDoctrineSubscriber">-->
-<!--            <argument type="service" id="CarlosChininin\App\Infrastructure\Service\FileUploader"/>-->
-<!--            <tag name="kernel.event_subscriber" event="attached_file.persist" />-->
-<!--        </service>-->
     </services>
 </container>
