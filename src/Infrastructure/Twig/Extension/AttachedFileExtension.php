@@ -21,8 +21,12 @@ class AttachedFileExtension extends AbstractExtension
         ];
     }
 
-    public function webpath(AttachedFile $file): string
+    public function webpath(?AttachedFile $file): ?string
     {
+        if (null === $file) {
+            return null;
+        }
+
         return $this->attachmentDirectory.$file->path();
     }
 }
