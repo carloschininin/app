@@ -68,7 +68,7 @@ class AttachedFile implements AttachedFileInterface
     public function setFile(?UploadedFile $file): void
     {
         if (null !== $file) {
-            $this->setName(pathinfo($file->getClientOriginalName(), \PATHINFO_FILENAME));
+            $this->setName($file->getClientOriginalName());
             $this->file = $file;
         }
     }
