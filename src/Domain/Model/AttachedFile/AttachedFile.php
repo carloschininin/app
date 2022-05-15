@@ -12,7 +12,7 @@ class AttachedFile implements AttachedFileInterface
 
     protected string $name;
 
-    protected string $secure;
+    protected ?string $secure = null;
 
     protected ?string $folder = null;
 
@@ -35,12 +35,12 @@ class AttachedFile implements AttachedFileInterface
         $this->name = $name;
     }
 
-    public function secure(): string
+    public function secure(): ?string
     {
         return $this->secure;
     }
 
-    public function setSecure(string $secure): void
+    public function setSecure(?string $secure): void
     {
         $this->secure = $secure;
     }

@@ -10,7 +10,7 @@ interface AttachedFileInterface
 
     public function name(): string;
 
-    public function secure(): string;
+    public function secure(): ?string;
 
     public function folder(): ?string;
 }
