@@ -17,16 +17,16 @@ class FileUploader
     ) {
     }
 
-    public function upload(UploadedFile $file, string $path = ''): string
+    public function upload(UploadedFile $file, ?string $path = null): string
     {
         $extension = $file->getClientOriginalExtension();
         $secure = sha1(uniqid((string) mt_rand(), true)).'.'.$extension;
         $this->path = $path;
 
-        try {
+//        try {
             $file->move($this->getTargetDirectory(), $secure);
-        } catch (FileException) {
-        }
+//        } catch (FileException) {
+//        }
 
         return $secure;
     }
