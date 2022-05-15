@@ -12,9 +12,9 @@ namespace CarlosChininin\App\Infrastructure\EventSubscriber;
 use CarlosChininin\App\Domain\Model\AttachedFile\AttachedFile;
 use CarlosChininin\App\Infrastructure\Service\FileUploader;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Persistence\Event\PreUpdateEventArgs;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AttachedFileDoctrineSubscriber implements EventSubscriberInterface
