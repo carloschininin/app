@@ -6,15 +6,16 @@
 
     <parameters>
         <parameter key="app.public_dir">%kernel.project_dir%/public</parameter>
+        <parameter key="app.attachment_directory">/upload</parameter>
     </parameters>
 
     <services>
         <service id="CarlosChininin\App\Infrastructure\Service\FileUploader">
             <argument>%app.public_dir%</argument>
-            <argument>%attachment_directory%</argument>
+            <argument>%app.attachment_directory%</argument>
         </service>
         <service id="CarlosChininin\App\Infrastructure\Twig\Extension\AttachedFileExtension">
-            <argument>%attachment_directory%</argument>
+            <argument>%app.attachment_directory%</argument>
             <tag name="twig.extension"/>
         </service>
     </services>
