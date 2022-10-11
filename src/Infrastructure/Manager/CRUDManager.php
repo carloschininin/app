@@ -72,14 +72,20 @@ class CRUDManager extends BaseManager
 
     protected function addOwner(object $entity): void
     {
-        if (!method_exists($entity, 'propietario') || !method_exists($entity, 'setPropietario')) {
+        if (method_exists($entity, 'propietario')
+            && method_exists($entity, 'setPropietario')
+            && null === $entity->propietario()
+        ) {
+            $entity->setPropietario($this->security->getUser());
+
             return;
         }
 
-        if (null !== $entity->propietario()) {
-            return;
+        if (method_exists($entity, 'owner')
+            && method_exists($entity, 'setOwner')
+            && null === $entity->owner()
+        ) {
+            $entity->setPropietario($this->security->getUser());
         }
-
-        $entity->setPropietario($this->security->getUser());
     }
 }
