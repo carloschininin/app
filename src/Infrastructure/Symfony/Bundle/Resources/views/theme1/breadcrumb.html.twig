@@ -1,14 +1,45 @@
 {% macro show(title) %}
-    <nav class="breadcrumb push d-print-none">
-        <a class="breadcrumb-item" href="{{ path('homepage') }}"> {{ 'Inicio' | gtrans }}</a>
-        <span class="breadcrumb-item active">{{ title | gtrans }}</span>
-    </nav>
+    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 pt-1 d-print-none">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+            <a href="{{ path('homepage') }}" class="text-muted text-hover-primary">{{ 'Inicio' | gtrans }}</a>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item">
+            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-dark">{{ title | gtrans }}</li>
+        <!--end::Item-->
+    </ul>
 {% endmacro %}
 
 {% macro show2(title2, route2, title) %}
-    <nav class="breadcrumb push d-print-none">
-        <a class="breadcrumb-item" href="{{ path('homepage') }}"> {{ 'Inicio' | gtrans }}</a>
-        <a class="breadcrumb-item" href="{{ path(route2) }}"> {{ title2 | gtrans }}</a>
-        <span class="breadcrumb-item active">{{ title | gtrans | capitalize }}</span>
-    </nav>
+    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 pt-1 d-print-none">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+            <a href="{{ path('homepage') }}" class="text-muted text-hover-primary">{{ 'Inicio' | gtrans }}</a>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item">
+            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">
+            <a href="{{ path(route2) }}" class="text-muted text-hover-success">{{ title2 | gtrans }}</a>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item">
+            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-dark">{{ title | gtrans | capitalize }}</li>
+        <!--end::Item-->
+    </ul>
 {% endmacro %}
