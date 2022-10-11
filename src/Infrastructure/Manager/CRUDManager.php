@@ -67,7 +67,7 @@ class CRUDManager extends BaseManager
         $export = new ExportExcel($items, $headers, $options);
         $export->execute()->headerStyle()->columnAutoSize();
 
-        return $export->download($fileName);
+        return $export->download($fileName, ['date' => true]);
     }
 
     protected function addOwner(object $entity): void
