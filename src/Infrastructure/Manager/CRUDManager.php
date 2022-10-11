@@ -85,7 +85,7 @@ class CRUDManager extends BaseManager
             && method_exists($entity, 'setOwner')
             && null === $entity->owner()
         ) {
-            $entity->setPropietario($this->security->getUser());
+            $entity->setOwner($this->security->getUser());
         }
     }
 }
