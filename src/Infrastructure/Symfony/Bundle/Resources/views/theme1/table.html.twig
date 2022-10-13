@@ -64,6 +64,29 @@
     {%- endif -%}
 {% endmacro %}
 
+{% macro tbl_tr_td_td(label, value, nullable=true) %}
+    {%- if value is not null or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <td>{{ label | gtrans }}</td>
+            <td>:</td>
+            <td>{{ value | raw }}</td>
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+{% macro tbl_tr_th_td(label, value, nullable=true) %}
+    {%- if value is not null or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <th>{{ label | gtrans }}</th>
+            <td>:</td>
+            <td>{{ value | raw }}</td>
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+
 {% macro tbl_th(nullable=true, head1=null, head2=null, head3=null, head4=null) %}
     {%- if head1 is not null or nullable == true -%}
         {% import _self as actions %}
