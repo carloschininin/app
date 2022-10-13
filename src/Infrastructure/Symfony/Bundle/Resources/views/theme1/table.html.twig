@@ -78,7 +78,7 @@
     {%- if value is not null or nullable == true -%}
         {% import _self as actions %}
         <tr>
-            <th>{{ label | gtrans }}</th>
+            <th class="fw-bold">{{ label | gtrans }}</th>
             <td>{{ value | raw }}</td>
         </tr>
     {%- endif -%}
