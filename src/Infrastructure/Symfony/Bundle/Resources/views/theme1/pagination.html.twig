@@ -5,7 +5,7 @@
                 <div class="col-sm-auto">
                     <span class="">
                         {% set total = (paginator.currentPage-1) * paginator.pageSize + 1 %}
-                        Mostrar de {{ total }} a {{ ( total - 1 ) + (paginator.results | length) }} de {{ paginator.numResults }} registros
+                        Mostrar de {{ total }} a {{ ( total - 1 ) + (paginator.results | length) }} de {{ paginator.count }} registros
                     </span>
                 </div>
             {% endif %}
