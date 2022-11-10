@@ -34,7 +34,7 @@
                     {% endif %}
 
                     {% for i in start..end %}
-                        <li class="page-item {% if i == paginator.currentPage %}active {% endif %}">
+                        <li class="page-item {%- if i == paginator.currentPage -%}active {%- endif -%}">
                             <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: i}) ) }}">{{ i }}</a>
                         </li>
                     {% endfor %}
