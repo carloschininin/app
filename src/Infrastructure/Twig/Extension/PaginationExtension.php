@@ -21,16 +21,16 @@ class PaginationExtension extends AbstractExtension
 
     public function indexFilter(int $index, PaginatedData $paginator): int
     {
-        return $index + ($paginator->currentPage() - 1) * $paginator->pageSize();
+        return $paginator->index($index);
     }
 
     public function indexReverseFilter(int $index, PaginatedData $paginator): int
     {
-        return ($paginator->numResults() + 1) - ($index + ($paginator->currentPage() - 1) * $paginator->pageSize());
+        return $paginator->count() - $paginator->index($index) + 1;
     }
 
     public function indexCountReverseFilter(int $index, int $total): int
     {
-        return ($total + 1) - $index;
+        return $total - $index + 1;
     }
 }
