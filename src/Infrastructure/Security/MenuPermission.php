@@ -10,12 +10,13 @@ declare(strict_types=1);
 namespace CarlosChininin\App\Infrastructure\Security;
 
 use JsonSerializable;
+use Stringable;
 
-final class MenuPermission implements JsonSerializable
+final class MenuPermission implements JsonSerializable, Stringable
 {
     public function __construct(
         private string $menu,
-        private array $attributes
+        private array $attributes,
     ) {
     }
 
@@ -35,5 +36,10 @@ final class MenuPermission implements JsonSerializable
             'menu' => $this->menu(),
             'attr' => $this->attributes(),
         ];
+    }
+
+    public function __toString()
+    {
+        return $this->menu();
     }
 }
