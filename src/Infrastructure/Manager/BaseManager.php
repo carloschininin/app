@@ -13,7 +13,7 @@ use CarlosChininin\Util\Error\Error;
 
 abstract class BaseManager
 {
-    private array $errors;
+    private array $errors = [];
 
     public function addError(Error $error): void
     {
