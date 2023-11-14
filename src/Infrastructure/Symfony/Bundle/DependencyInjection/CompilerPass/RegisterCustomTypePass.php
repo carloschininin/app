@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class RegisterCustomTypePass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $typesDefinition = [];
         if ($container->hasParameter('doctrine.dbal.connection_factory.types')) {

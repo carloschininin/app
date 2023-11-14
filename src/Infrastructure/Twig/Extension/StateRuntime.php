@@ -14,8 +14,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 final class StateRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(private TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     public function yesnoFilter(?bool $value): string

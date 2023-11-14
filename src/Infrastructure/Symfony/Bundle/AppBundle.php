@@ -17,17 +17,16 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class AppBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
         $container->addCompilerPass(new RegisterEnumTypePass());
         $container->addCompilerPass(new RegisterCustomTypePass());
-
-        $this->addRegisterMappingsPass($container);
+        // $this->addRegisterMappingsPass($container);
     }
 
-    private function addRegisterMappingsPass(ContainerBuilder $container)
+    private function addRegisterMappingsPass(ContainerBuilder $container): void
     {
         $mappings = [
             realpath(__DIR__.'/Resources/config/doctrine-mapping') => 'CarlosChininin\App\Domain\Model',

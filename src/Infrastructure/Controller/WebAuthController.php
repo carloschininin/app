@@ -16,12 +16,16 @@ abstract class WebAuthController extends WebController
 {
     public const BASE_ROUTE = 'undefined';
 
-    public function __construct(private Security $security)
+    public function __construct(private readonly Security $security)
     {
     }
 
-    protected function denyAccess(array $permissions, ?object $entity = null, ?string $menuRoute = null, string $message = 'Acceso denegado...'): void
-    {
+    protected function denyAccess(
+        array $permissions,
+        object $entity = null,
+        string $menuRoute = null,
+        string $message = 'Acceso denegado...'
+    ): void {
         $menuRoute = $menuRoute ?? static::BASE_ROUTE;
 
         $this->security->denyAccessUnlessGranted($permissions, $menuRoute, $entity, $message);

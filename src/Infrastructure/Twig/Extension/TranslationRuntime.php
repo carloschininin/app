@@ -19,8 +19,8 @@ class TranslationRuntime implements RuntimeExtensionInterface
     public const CACHE_TAG = 'GTRANS_';
 
     public function __construct(
-        private TranslatorInterface $translator,
-        private BaseCache $baseCache,
+        private readonly TranslatorInterface $translator,
+        private readonly BaseCache $baseCache,
     ) {
     }
 

@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 
-use DateTimeInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class DateRuntime implements RuntimeExtensionInterface
@@ -23,7 +22,7 @@ class DateRuntime implements RuntimeExtensionInterface
         $this->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     }
 
-    public function dateFilter(?DateTimeInterface $date, ?string $format = 'd-m-Y'): string
+    public function dateFilter(?\DateTimeInterface $date, ?string $format = 'd-m-Y'): string
     {
         if (null === $date) {
             return '';
@@ -32,7 +31,7 @@ class DateRuntime implements RuntimeExtensionInterface
         return $date->format($format);
     }
 
-    public function dateMediumFilter(?DateTimeInterface $date): string
+    public function dateMediumFilter(?\DateTimeInterface $date): string
     {
         if (null === $date) {
             return '';
@@ -41,7 +40,7 @@ class DateRuntime implements RuntimeExtensionInterface
         return $date->format('d').' de '.mb_strtoupper($this->months[$date->format('n') - 1]).' del '.$date->format('Y');
     }
 
-    public function dateLargeFilter(?DateTimeInterface $date): string
+    public function dateLargeFilter(?\DateTimeInterface $date): string
     {
         if (null === $date) {
             return '';
@@ -50,7 +49,7 @@ class DateRuntime implements RuntimeExtensionInterface
         return $this->days[$date->format('w')].', '.$date->format('d').' de '.$this->months[$date->format('n') - 1].' del '.$date->format('Y');
     }
 
-    public function dateFormatFilter(?DateTimeInterface $date, string $type): string
+    public function dateFormatFilter(?\DateTimeInterface $date, string $type): string
     {
         if ('F' === $type) {
             return $this->months[$date->format('n') - 1];
@@ -59,7 +58,7 @@ class DateRuntime implements RuntimeExtensionInterface
         return '';
     }
 
-    public function dateTimeFilter(?DateTimeInterface $date, ?string $format = 'd-m-Y h:i:s a'): string
+    public function dateTimeFilter(?\DateTimeInterface $date, ?string $format = 'd-m-Y h:i:s a'): string
     {
         if (null === $date) {
             return '';
@@ -68,7 +67,7 @@ class DateRuntime implements RuntimeExtensionInterface
         return $date->format($format);
     }
 
-    public function dateTimeLargeFilter(?DateTimeInterface $date): string
+    public function dateTimeLargeFilter(?\DateTimeInterface $date): string
     {
         if (null === $date) {
             return '';

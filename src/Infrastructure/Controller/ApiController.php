@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Controller;
 
-use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +16,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class ApiController extends AbstractController
 {
+    public function denyAccessUnlessAuthorization(Request $request): void
+    {
+        $authorization = $this->authorization($request);
+        if (!$authorization['status']) {
+            throw new \InvalidArgumentException($authorization['message']);
+        }
+    }
+
+    public function response(array $data, bool $status = true): Response
+    {
+        return new JsonResponse(array_merge(['status' => $status], $data));
+    }
+
     protected function authorization(Request $request): array
     {
         if (!$request->headers->has('Authorization') || 0 !== mb_strpos($request->headers->get('Authorization'), 'Bearer ')) {
@@ -29,18 +41,5 @@ abstract class ApiController extends AbstractController
         }
 
         return ['status' => true];
-    }
-
-    public function denyAccessUnlessAuthorization(Request $request): void
-    {
-        $authorization = $this->authorization($request);
-        if (!$authorization['status']) {
-            throw new InvalidArgumentException($authorization['message']);
-        }
-    }
-
-    public function response(array $data, bool $status = true): Response
-    {
-        return new JsonResponse(array_merge(['status' => $status], $data));
     }
 }

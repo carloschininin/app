@@ -20,7 +20,7 @@ class BaseCache
     public const CACHE_TIME_SHORT = 3600; // 1 hora
     public const CACHE_TIME_LONG = 864000; // 864000; // 10 dias
 
-    public function __construct(private TagAwareCacheInterface $baseCache)
+    public function __construct(private readonly TagAwareCacheInterface $baseCache)
     {
     }
 

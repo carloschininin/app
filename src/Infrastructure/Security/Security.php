@@ -11,7 +11,6 @@ namespace CarlosChininin\App\Infrastructure\Security;
 
 use CarlosChininin\App\Domain\Model\AuthUser\AuthUser;
 use Doctrine\ORM\QueryBuilder;
-use InvalidArgumentException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -25,7 +24,7 @@ final class Security
     private ?bool $isSuperAdmin = null;
 
     public function __construct(
-        private TokenStorageInterface $tokenStorage
+        private readonly TokenStorageInterface $tokenStorage
     ) {
     }
 
@@ -68,7 +67,7 @@ final class Security
     }
 
     /** @param Permission[] $permissions */
-    public function checkGrantedAccess(array $permissions, ?string $menuRoute = null, ?object $entity = null): bool
+    public function checkGrantedAccess(array $permissions, string $menuRoute = null, object $entity = null): bool
     {
         if ($this->isSuperAdmin()) {
             return true;
@@ -76,7 +75,7 @@ final class Security
 
         $this->menuRoute = $menuRoute ?? $this->menuRoute;
         if (null === $this->menuRoute) {
-            throw new InvalidArgumentException('especifique el menuRoute');
+            throw new \InvalidArgumentException('especifique el menuRoute');
         }
 
         $auths = $this->auths();
@@ -111,7 +110,7 @@ final class Security
         return false;
     }
 
-    public function denyAccessUnlessGranted(array $permissions, ?string $menuRoute = null, ?object $entity = null, string $message = 'access_denied'): void
+    public function denyAccessUnlessGranted(array $permissions, string $menuRoute = null, object $entity = null, string $message = 'access_denied'): void
     {
         if (!$this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
             $exception = new AccessDeniedException($message);
@@ -196,7 +195,7 @@ final class Security
     }
 
     /** @deprecated User functions new, list, edit, etc */
-    public function has(string $attribute, ?object $object = null, ?string $menuRoute = null): bool
+    public function has(string $attribute, object $object = null, string $menuRoute = null): bool
     {
         $menuRoute = $menuRoute ?? $this->menuRoute;
         $permission = Permission::byValue($attribute);
@@ -204,7 +203,7 @@ final class Security
         return $this->checkGrantedAccess([$permission], $menuRoute, $object);
     }
 
-    public function filterQuery(QueryBuilder $queryBuilder, ?string $menuRoute = null, array $permissions = []): void
+    public function filterQuery(QueryBuilder $queryBuilder, string $menuRoute = null, array $permissions = []): void
     {
         if ($this->isSuperAdmin()) {
             return;
@@ -222,11 +221,11 @@ final class Security
     private function permissionCheck(Permission $permission, Permission $permissionAll, AuthUser $owner = null): bool
     {
         return
-            $this->master() ||
-            \in_array($permissionAll->value, $this->authsMenu(), true) ||
-            (
-                (\in_array($permission->value, $this->authsMenu(), true)) &&
-                $this->isOwner($owner)
+            $this->master()
+            || \in_array($permissionAll->value, $this->authsMenu(), true)
+            || (
+                \in_array($permission->value, $this->authsMenu(), true)
+                && $this->isOwner($owner)
             );
     }
 

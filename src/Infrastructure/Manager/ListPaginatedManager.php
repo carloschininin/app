@@ -17,7 +17,7 @@ use CarlosChininin\Util\Pagination\PaginatorInterface;
 class ListPaginatedManager extends BaseManager
 {
     public function __construct(
-        private PaginatorInterface $paginator,
+        private readonly PaginatorInterface $paginator,
     ) {
     }
 
