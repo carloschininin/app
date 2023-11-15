@@ -17,15 +17,15 @@ use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Traversable;
 
 class MenuPermissionType extends AbstractType implements DataMapperInterface
 {
-    public function __construct(private MenuServiceInterface $menuService)
-    {
+    public function __construct(
+        private readonly MenuServiceInterface $menuService
+    ) {
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('menu', ChoiceType::class, [
@@ -40,22 +40,39 @@ class MenuPermissionType extends AbstractType implements DataMapperInterface
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->setDataMapper($this)
-        ;
+            ->setDataMapper($this);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [
                 'data_class' => MenuPermission::class,
                 'empty_data' => null,
-            ]);
+            ]
+        );
     }
 
     public function getBlockPrefix(): string
     {
         return 'menu_permission';
+    }
+
+    /** @param MenuPermission $viewData */
+    public function mapDataToForms($viewData, \Traversable $forms): void
+    {
+        $forms = iterator_to_array($forms);
+        $forms['menu']->setData($viewData ? $viewData->menu() : '');
+        $forms['attributes']->setData($viewData ? $viewData->attributes() : []);
+    }
+
+    public function mapFormsToData(\Traversable $forms, &$viewData): void
+    {
+        $forms = iterator_to_array($forms);
+        $viewData = new MenuPermission(
+            $forms['menu']->getData(),
+            $forms['attributes']->getData()
+        );
     }
 
     private function values(): array
@@ -71,22 +88,5 @@ class MenuPermissionType extends AbstractType implements DataMapperInterface
     private function menus(): array
     {
         return $this->menuService->menusToArray();
-    }
-
-    /** @param MenuPermission $viewData */
-    public function mapDataToForms($viewData, Traversable $forms)
-    {
-        $forms = iterator_to_array($forms);
-        $forms['menu']->setData($viewData ? $viewData->menu() : '');
-        $forms['attributes']->setData($viewData ? $viewData->attributes() : []);
-    }
-
-    public function mapFormsToData(Traversable $forms, &$viewData)
-    {
-        $forms = iterator_to_array($forms);
-        $viewData = new MenuPermission(
-            $forms['menu']->getData(),
-            $forms['attributes']->getData()
-        );
     }
 }
