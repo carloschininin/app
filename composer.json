@@ -20,17 +20,17 @@
     "doctrine/orm": "^2.10",
     "statickidz/php-google-translate-free": "^1.2",
     "symfony/cache-contracts": "^3.0",
-    "symfony/config": "^6.0",
-    "symfony/dependency-injection": "^6.0",
-    "symfony/form": "^6.0",
-    "symfony/http-kernel": "^6.0",
-    "symfony/intl": "^6.0",
-    "symfony/security-core": "^6.0",
+    "symfony/config": "^6.0|^7.0",
+    "symfony/dependency-injection": "^6.0|^7.0",
+    "symfony/form": "^6.0|^7.0",
+    "symfony/http-kernel": "^6.0|^7.0",
+    "symfony/intl": "^6.0|^7.0",
+    "symfony/security-core": "^6.0|^7.0",
     "symfony/translation-contracts": "^3.0",
     "twig/twig": "^3.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^v3.30"
+    "friendsofphp/php-cs-fixer": "^3.30"
   },
   "config": {
     "optimize-autoloader": true,
