@@ -17,8 +17,8 @@ use CarlosChininin\Util\Http\ParamFetcher;
 use CarlosChininin\Util\Pagination\DoctrinePaginator;
 use CarlosChininin\Util\Pagination\PaginatedData;
 use CarlosChininin\Util\Pagination\PaginationDto;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Security;
 
 class CRUDManager extends BaseManager
 {
