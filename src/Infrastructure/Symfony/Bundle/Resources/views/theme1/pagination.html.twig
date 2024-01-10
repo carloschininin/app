@@ -68,10 +68,11 @@
     <div class="row pb-2">
         <div class="col-sm-auto">
             {% if default_results_per_page is defined %}
+                {% set limit = app.request.get('limit') ?: paginator.pageSize  %}
                 <label for="filter_size" class="d-none"></label>
                 <select id="filter_size" class="form-control form-select form-select-sm" name="limit">
                     {% for key,value in default_results_per_page %}
-                        <option value="{{ value }}" {% if app.request.get('limit') == value %} selected {% endif %}>{{key}} {{ 'registros' | gtrans }}</option>
+                        <option value="{{ value }}" {% if limit == value %} selected {% endif %}>{{key}} {{ 'registros' | gtrans }}</option>
                     {% endfor %}
                 </select>
             {% endif %}
