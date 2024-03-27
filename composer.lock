@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/carloschininin/util.git",
-                "reference": "116fd95acf82e11594dc8f36609c5d3787b52db3"
+                "reference": "dbf7a513e0c39ae22cd067402ccbfd894cf5fedf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carloschininin/util/zipball/116fd95acf82e11594dc8f36609c5d3787b52db3",
-                "reference": "116fd95acf82e11594dc8f36609c5d3787b52db3",
+                "url": "https://api.github.com/repos/carloschininin/util/zipball/dbf7a513e0c39ae22cd067402ccbfd894cf5fedf",
+                "reference": "dbf7a513e0c39ae22cd067402ccbfd894cf5fedf",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +108,7 @@
                 "issues": "https://github.com/carloschininin/util/issues",
                 "source": "https://github.com/carloschininin/util/tree/master"
             },
-            "time": "2024-03-05T04:04:50+00:00"
+            "time": "2024-03-21T23:04:19+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -895,16 +895,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "716fc97b70cf8116f74eaa0588eef51420874bf9"
+                "reference": "9c560713925ac5859342e6ff370c4c997acf2fd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/716fc97b70cf8116f74eaa0588eef51420874bf9",
-                "reference": "716fc97b70cf8116f74eaa0588eef51420874bf9",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/9c560713925ac5859342e6ff370c4c997acf2fd4",
+                "reference": "9c560713925ac5859342e6ff370c4c997acf2fd4",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +921,7 @@
                 "php": "^8.1",
                 "psr/cache": "^1 || ^2 || ^3",
                 "symfony/console": "^5.4 || ^6.0 || ^7.0",
-                "symfony/var-exporter": "~6.2.13 || ^6.3.2 || ^7.0"
+                "symfony/var-exporter": "^6.3.9 || ^7.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^12.0",
@@ -977,9 +977,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.1.0"
+                "source": "https://github.com/doctrine/orm/tree/3.1.1"
             },
-            "time": "2024-03-03T17:45:20+00:00"
+            "time": "2024-03-21T11:37:52+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -5919,16 +5919,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "ced299686f41dce890debac69273b47ffe98a40c"
+                "reference": "4f988f8fdf580d53bdb2d1278fe93d1ed5462255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/ced299686f41dce890debac69273b47ffe98a40c",
-                "reference": "ced299686f41dce890debac69273b47ffe98a40c",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/4f988f8fdf580d53bdb2d1278fe93d1ed5462255",
+                "reference": "4f988f8fdf580d53bdb2d1278fe93d1ed5462255",
                 "shasum": ""
             },
             "require": {
@@ -5939,7 +5939,7 @@
             "require-dev": {
                 "phpstan/phpstan": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
-                "symfony/phpunit-bridge": "^6.0"
+                "phpunit/phpunit": "^8.5 || ^9.6 || ^10.5"
             },
             "type": "library",
             "autoload": {
@@ -5963,9 +5963,9 @@
                 "performance"
             ],
             "support": {
-                "irc": "irc://irc.freenode.org/composer",
+                "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/xdebug-handler/issues",
-                "source": "https://github.com/composer/xdebug-handler/tree/3.0.3"
+                "source": "https://github.com/composer/xdebug-handler/tree/3.0.4"
             },
             "funding": [
                 {
@@ -5981,7 +5981,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-25T21:32:43+00:00"
+            "time": "2024-03-26T18:29:49+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
