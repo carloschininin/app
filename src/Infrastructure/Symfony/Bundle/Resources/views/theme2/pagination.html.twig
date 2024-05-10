@@ -1,0 +1,99 @@
+{% macro show(paginator, route, hasInfo = true) -%}
+    {% if paginator is not null and paginator.hasToPaginate %}
+        <div class="row">
+            <div class="col">
+                {% set routeParams = app.request.query.all %}
+                <ul class="pagination pagination-sm justify-content-center justify-content-sm-start">
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: 1})) }}">
+                            <i class="fa fa-angle-double-left kt-font-brand"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        {% if paginator.hasPreviousPage %}
+                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.previousPage})) }}">
+                                <i class="fa fa-angle-left kt-font-brand"></i>
+                            </a>
+                        {% endif %}
+                    </li>
+                    {% set start = paginator.currentPage - 3 > 0 ? paginator.currentPage - 3 : 1 %}
+                    {% set end = paginator.currentPage + 3 < paginator.lastPage ? paginator.currentPage + 3 : paginator.lastPage %}
+
+                    {% if start > 1 %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    {% endif %}
+
+                    {% for i in start..end %}
+                        <li class="page-item {% if i == paginator.currentPage -%}active{%- endif -%}">
+                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: i}) ) }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if end < paginator.lastPage %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item">
+                        {% if paginator.hasNextPage %}
+                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.nextPage})) }}">
+                                <i class="fa fa-angle-right kt-font-brand"></i>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.lastPage})) }}">
+                            <i class="fa fa-angle-double-right kt-font-brand"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {% if hasInfo %}
+                <div class="col-auto">
+                    <span class="">
+                        {% set total = (paginator.currentPage-1) * paginator.pageSize + 1 %}
+                        <span class="d-none d-sm-inline">Mostrar de</span> {{ total }} a {{ ( total - 1 ) + (paginator.results | length) }} de {{ paginator.count }} registros
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro pager(paginator, route, hasSearch = true) -%}
+    {% import _self as paginations %}
+    <div class="row pb-2">
+        <div class="col-sm-auto">
+            {% if default_results_per_page is defined %}
+                {% set limit = app.request.get('limit') ?: paginator.pageSize  %}
+                <label for="filter_size" class="d-none"></label>
+                <select id="filter_size" class="form-control form-select form-select-sm" name="limit">
+                    {% for key,value in default_results_per_page %}
+                        <option value="{{ value }}" {% if limit == value %} selected {% endif %}>{{key}} {{ 'registros' | gtrans }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </div>
+        {% if hasSearch %}
+            <div class="col-sm-auto">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Buscar"
+                           aria-label="Recipient's username" aria-describedby="basic-addon2"
+                           name="b" id="filter_text" value="{{ app.request.get('b') }}"/>
+                    <span class="input-group-text" id="filter_text_icon" role="button">
+                        <i class="fas fa-search fs-4"></i>
+                    </span>
+                </div>
+            </div>
+        {% endif %}
+        {% if paginator.pageSize > 10 %}
+            <div class="col">
+                {{ paginations.show(paginator,route, false) }}
+            </div>
+        {% endif %}
+    </div>
+{%- endmacro %}

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -20,15 +20,23 @@ use CarlosChininin\Util\Pagination\PaginationDto;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @template T of object
+ */
 class CRUDManager extends BaseManager
 {
+    public const PAGE_LIMIT = 5;
+
     public function __construct(
         private readonly BaseRepository $repository,
         private readonly Security $security,
     ) {
     }
 
-    public function save(object $entity): bool
+    /**
+     * @param T $entity
+     */
+    public function save(mixed $entity): bool
     {
         $this->addOwner($entity);
 
@@ -37,27 +45,39 @@ class CRUDManager extends BaseManager
         return true;
     }
 
-    public function remove(object $entity): bool
+    /**
+     * @param T $entity
+     */
+    public function remove(mixed $entity): bool
     {
         $this->repository->remove($entity);
 
         return true;
     }
 
+    /**
+     * @return iterable<T>|array
+     */
     public function dataList(ParamFetcher $params, bool $inArray = false): array
     {
         return $this->repository->filter($params, $inArray, [Permission::LIST_ALL]);
     }
 
+    /**
+     * @return iterable<T>|array
+     */
     public function dataExport(ParamFetcher $params, bool $inArray = false): array
     {
         return $this->repository->filter($params, $inArray, [Permission::EXPORT_ALL]);
     }
 
+    /**
+     * @return PaginatedData<T>
+     */
     public function paginate(int $page, ParamFetcher $params): PaginatedData
     {
         $limit = $params->getNullableInt('limit') ?? $params->getNullableInt('n');
-        $pagination = PaginationDto::create($page, $limit);
+        $pagination = PaginationDto::create($page, $limit ?? self::PAGE_LIMIT);
         $dataQuery = $this->repository->filterQuery($params, [Permission::LIST_ALL]);
 
         return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
@@ -74,7 +94,10 @@ class CRUDManager extends BaseManager
         return $export->execute(false)->download($fileName);
     }
 
-    protected function addOwner(object $entity): void
+    /**
+     * @param T $entity
+     */
+    protected function addOwner(mixed $entity): void
     {
         if (method_exists($entity, 'propietario')
             && method_exists($entity, 'setPropietario')

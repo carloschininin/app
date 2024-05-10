@@ -1,0 +1,16 @@
+{% import '@App/theme2/menu/menu_generator.html.twig' as myMenu %}
+
+{% set homeActive = menuSelected == 'homepage' ? 'active' : '' %}
+
+<ul class="nav-main">
+    <li class="nav-main-item">
+        <a class="nav-main-link {{ homeActive }}" href="{{ path('homepage') }}">
+            <i class="nav-main-link-icon fa fa-house-user"></i>
+            <span class="nav-main-link-name">{{ 'dashboard' | trans | upper }}</span>
+        </a>
+    </li>
+    {% if nameMenu is defined %}
+        <li class="nav-main-heading">{{ nameMenu }}</li>
+    {% endif %}
+    {{ myMenu.generator(menus) }}
+</ul>

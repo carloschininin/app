@@ -13,8 +13,16 @@ use CarlosChininin\Util\Http\ParamFetcher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @template T of object
+ *
+ * @template-extends ServiceEntityRepository<T>
+ */
 abstract class BaseRepository extends ServiceEntityRepository
 {
+    /**
+     * @return iterable<T>|array
+     */
     public function filter(ParamFetcher|array $params, bool $inArray = false, array $permissions = []): array
     {
         $queryBuilder = $this->filterQuery($params, $permissions)->getQuery();
@@ -22,6 +30,9 @@ abstract class BaseRepository extends ServiceEntityRepository
         return true === $inArray ? $queryBuilder->getArrayResult() : $queryBuilder->getResult();
     }
 
+    /**
+     * @return iterable<T>|array
+     */
     public function all(bool $inArray = false): array
     {
         $queryBuilder = $this->allQuery()->getQuery();
@@ -29,19 +40,25 @@ abstract class BaseRepository extends ServiceEntityRepository
         return true === $inArray ? $queryBuilder->getArrayResult() : $queryBuilder->getResult();
     }
 
+    /**
+     * @param T $entity
+     */
     public function save(mixed $entity, bool $flush = true): void
     {
-        $this->_em->persist($entity);
+        $this->getEntityManager()->persist($entity);
         if ($flush) {
-            $this->_em->flush();
+            $this->getEntityManager()->flush();
         }
     }
 
+    /**
+     * @param T $entity
+     */
     public function remove(mixed $entity, bool $flush = true): void
     {
-        $this->_em->remove($entity);
+        $this->getEntityManager()->remove($entity);
         if ($flush) {
-            $this->_em->flush();
+            $this->getEntityManager()->flush();
         }
     }
 

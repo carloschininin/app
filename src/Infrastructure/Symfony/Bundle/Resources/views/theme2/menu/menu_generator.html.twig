@@ -1,0 +1,24 @@
+{% macro generator(menus) %}
+    {% for menu in menus|sort((a, b) => a.ranking <=> b.ranking ?: a.name <=> b.name) %}
+        {% if menu.submenu | length > 0 %}
+            <li class="nav-main-item {% if menu.selected is defined %}open{% endif %}">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                    {% if menu.icon %}
+                        <i class="nav-main-link-icon {{ menu.icon }}"></i>
+                    {% endif %}
+                    <span class="nav-main-link-name">{{ menu.name | gtrans | upper }}</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    {{ _self.generator(menu.submenu) }}
+                </ul>
+            </li>
+        {% else %}
+            <li class="nav-main-item">
+                <a class="nav-main-link {% if menu.selected is defined %}active{% endif %}" href="{{ path(menu.route) }}">
+                    <span class="nav-main-link-name">{{ menu.name | gtrans }}</span>
+                    {% if menu.badge %}<span class="badge text-light-primary">{{ menu.badge }}</span>{% endif %}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

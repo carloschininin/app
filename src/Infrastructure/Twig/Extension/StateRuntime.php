@@ -31,6 +31,6 @@ final class StateRuntime implements RuntimeExtensionInterface
         $text = self::yesnoFilter($value);
         $class = (null === $value || false === $value) ? 'secondary' : 'success';
 
-        return "<span class='badge badge-$class'>".$text.'</span>';
+        return "<span class='badge badge-$class bg-$class'>".$text.'</span>';
     }
 }

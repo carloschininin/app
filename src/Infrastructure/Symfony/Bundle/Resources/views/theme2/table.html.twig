@@ -1,0 +1,179 @@
+{% macro display(value) -%}
+    {%- if value.timestamp is defined -%}
+        {{ value | fecha }}
+    {%- elseif value is iterable -%}
+        {% for item in value %}
+            {{ item }},
+        {% endfor %}
+    {%- else -%}
+        {{ value | raw }}
+    {%- endif %}
+{%- endmacro %}
+
+{% macro tbl_start(class='table-striped',attributes='') %}
+<table class="table {{ class }} table-vcenter" {{ attributes }}>
+    {% endmacro %}
+
+    {% macro tbl_end() %}
+</table>
+{% endmacro %}
+
+{% macro thead_start(class='',attributes='') %}
+<thead class="thead-light {{ class }}" {{ attributes }}>
+{% endmacro %}
+
+{% macro thead_end() %}
+</thead>
+{% endmacro %}
+
+{% macro tbody_start(class='',attributes='') %}
+<tbody class="{{ class }}" {{ attributes }}>
+{% endmacro %}
+
+{% macro tbody_end() %}
+</tbody>
+{% endmacro %}
+
+{% macro tfoot_start(class='',attributes='') %}
+<tfoot class="{{ class }}" {{ attributes }}>
+{% endmacro %}
+
+{% macro tfoot_end() %}
+</tfoot>
+{% endmacro %}
+
+{% macro tbl_head(class='', value1, value2, value3, value4) %}
+    <thead class="{{ class }}">
+    {% if value1 %} {{ value1 }} {% endif %}
+    {% if value2 %} {{ value2 }} {% endif %}
+    {% if value3 %} {{ value3 }} {% endif %}
+    {% if value4 %} {{ value4 }} {% endif %}
+    </thead>
+{% endmacro %}
+
+{% macro tbl_tr(label, value, nullable=true, value2=null,value3=null,value4=null) %}
+    {%- if value is not null or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <th>{{ label }}</th>
+            <td>{{ actions.display(value) }}</td>
+            {% if value2 %}<td>{{ actions.display(value2) }}</td>{% endif %}
+            {% if value3 %}<td>{{ actions.display(value3) }}</td>{% endif %}
+            {% if value4 %}<td>{{ actions.display(value4) }}</td>{% endif %}
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+{% macro tbl_tr_td_td(label, value, nullable=true) %}
+    {%- if value is not null or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <td>{{ label | gtrans }}</td>
+            <td>{{ value | raw }}</td>
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+{% macro tbl_tr_th_td(label, value, nullable=true) %}
+    {%- if value is not null or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <th class="fw-bold">{{ label | gtrans }}</th>
+            <td>{{ value | raw }}</td>
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+
+{% macro tbl_th(nullable=true, head1=null, head2=null, head3=null, head4=null) %}
+    {%- if head1 is not null or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            {% if head1 %}<th>{{ head1 | trans | upper }}</th>{% endif %}
+            {% if head2 %}<th>{{ head2 | trans | upper }}</th>{% endif %}
+            {% if head3 %}<th>{{ head3 | trans | upper }}</th>{% endif %}
+            {% if head4 %}<th>{{ head4 | trans | upper }}</th>{% endif %}
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+{% macro tbl_tr_file_img(label, image, type = '', nullable=true) %}
+    {%- if nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <th>{{ label }}</th>
+            <td>
+                {%- if image != null -%}
+                    {% set imagePath = asset(_media_directory ~ image.path) %}
+                    {% set imagePath = (type == '') ? imagePath : imagePath | imagine_filter(type) %}
+                    <figure>
+                        <img src="{{ imagePath }}" class="img-fluid" alt="{{ image.nombre }}" title="{{ image.nombre }}" />
+                        {#                        <figcaption>{{ image.descripcion }}</figcaption>#}
+                    </figure>
+                {%- endif -%}
+            </td>
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+{% macro tbl_tr_td_multiple(label, values, nullable=true, class_label = '', class_value = '') %}
+    {%- if values is iterable or nullable == true -%}
+        {% import _self as actions %}
+        <tr>
+            <td class="{{ class_label }}">{{ label }}</td>
+            {% for value in values %}
+                <td class="{{ class_value }}">{{ actions.display(value) }}</td>
+            {% endfor %}
+        </tr>
+    {%- endif -%}
+{% endmacro %}
+
+{% macro th(label, trans = false, class = '', attributes = '') %}
+    {% if trans %}
+        <th class="{{ class }}" {{ attributes }}>{{ label | gtrans }}</th>
+    {% else %}
+        <th class="{{ class }}" {{ attributes }}>{{ label }}</th>
+    {% endif %}
+{% endmacro %}
+
+{% macro td(value, trans = false, class = '') %}
+    {% if trans %}
+        <td class="{{ class }}">{{ value | gtrans }}</td>
+    {% else %}
+        <td class="{{ class }}">{{ value }}</td>
+    {% endif %}
+{% endmacro %}
+
+{% macro display(value) -%}
+    {%- if value.timestamp is defined -%}
+        {{ value | fecha }}
+    {%- elseif value is iterable -%}
+        {% for item in value %}
+            {{ item }},
+        {% endfor %}
+    {%- else -%}
+        {{ value | raw }}
+    {%- endif %}
+{%- endmacro %}
+
+{% macro row(class='', value1, value2, value3, value4) %}
+    <div class="row {{ class }}">
+        {% if value1 %} {{ value1 }} {% endif %}
+        {% if value2 %} {{ value2 }} {% endif %}
+        {% if value3 %} {{ value3 }} {% endif %}
+        {% if value4 %} {{ value4 }} {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro col(label, value, label_num=4, value_num=0, nullable=true) %}
+    {%- if value is not null or nullable == true -%}
+        {% import _self as actions %}
+        <div class="col-sm-{{ label_num }} col-5">
+            <span>{{ label }}</span>
+        </div>
+        {% set value_num = (value_num != 0) ? value_num : 12 - label_num %}
+        <div class="col-sm-{{ value_num }} col-7">
+            {{ actions.display(value) }}
+        </div>
+    {%- endif -%}
+{% endmacro %}
