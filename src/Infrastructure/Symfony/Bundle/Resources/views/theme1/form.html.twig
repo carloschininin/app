@@ -1,306 +1,80 @@
-
-{% macro frm_start(form, form_class='') -%}
-    {{ form_start(form, {attr: {class: form_class, id: form.vars.id, autocomplete: 'off'}}) }}
-{%- endmacro %}
-
-{% macro frm_end(form) -%}
-    {{ form_rest(form) }}
-    {{ form_errors(form) }}
-    {{ form_end(form) }}
-{%- endmacro %}
-
-{% macro btn_save(title, attributes='') %}
-    <button class="btn btn-warning" {{ attributes }}>
-        <span>
-            <i class="fa fa-save"></i> {{ title |gtrans }}
-        </span>
-    </button>
+{% macro start(form, customAttr = {}) -%}
+    {% set customAttr = customAttr | merge({autocomplete: 'off'}) %}
+    {{ form_start(form, {attr: customAttr}) }}
 {% endmacro %}
 
-{#{%- macro frm_label(value, class=null) -%}#}
-{#    {% set label = value.vars.label %}#}
-{#    {% if label is not same as(false) -%}#}
-{#        {% set label_attr = {} %}#}
-
-{#        {% if not value.vars.compound -%}#}
-{#            {% set label_attr = label_attr|merge({'for': value.vars.id}) %}#}
-{#        {%- endif -%}#}
-{#        {% if class is null %} {% set class = _class_horizontal_label %} {% endif %}#}
-{#        {% set label_attr = label_attr|merge({'class': 'col-form-label ' ~ class }) %}#}
-{#        {% if value.vars.required -%}#}
-{#            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}#}
-{#        {%- endif -%}#}
-{#        {% if value.vars.label is empty -%}#}
-{#            {%- if value.vars.label_format is not empty -%}#}
-{#                {% set label = label_format|replace({#}
-{#                    '%name%': value.vars.name,#}
-{#                    '%id%': value.vars.id,#}
-{#                }) %}#}
-{#            {%- else -%}#}
-{#                {% set label = value.vars.name|humanize %}#}
-{#            {%- endif -%}#}
-{#        {%- endif -%}#}
-
-{#        <label {% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>#}
-{#            {{ label | gtrans }}#}
-{#            {% if value.vars.popover ?? false %}#}
-{#                <span class="float-right">#}
-{#                    &nbsp;#}
-{#                    <i class="fa fa-question-circle-o text-primary" data-toggle="popover" data-placement="top"#}
-{#                       data-content="{{ value.vars.popover }}"></i>#}
-{#                </span>#}
-{#            {% endif %}#}
-{#        </label>#}
-{#    {% endif %}#}
-{#{%- endmacro -%}#}
-
-{% macro frm_field(value, class='', class_widget='') -%}
-    <div class="form-group m-form__group row {{ class }} pb-1">
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-md-4 col-sm-5'} }) }}
-        <div class="col-md-8 col-sm-7">
-            {{ form_widget(value, {attr: {class: 'form-control m-input' ~ class_widget} }) }}
-        </div>
-    </div>
-{%- endmacro %}
-
-{% macro frm_btn(label, class='') -%}
-    {% import _self as actions %}
-    <div class="form-group m-form__group row">
-        <div class="col-md-4 col-sm-12"></div>
-        <div class="col-md-8 col-sm-12">
-            {{ actions.btn_save(label) }}
-        </div>
-    </div>
-{%- endmacro %}
-
-{% macro frm_field_checkbox(value, class='', class_widget='') -%}
-    <span class="p-3 {{ class }}">
-        <label class="m-checkbox">
-            {{ form_widget(value, {attr: {class: '' ~ class_widget} }) }}
-            {% if value.vars.label %}
-                {{ value.vars.label | capitalize }}
-            {% else %}
-                {{ value.vars.name | capitalize }}
-            {% endif %}
-            <span></span>
-        </label>
-    </span>
-{%- endmacro %}
-
-{% macro frm_field_select_widget(value, class_widget='') %}
-    {{ form_widget(value, {attr: {class: 'm-input' ~ class_widget} }) }}
-{%- endmacro %}
-
-{% macro frm_field_collection(value, class_widget='') -%}
-    <div class="form-group m-form__group row">
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-lg-3 col-sm-12'} }) }}
-        <div class="col-md-9 col-sm-12">
-            <ul id="{{ value.vars.id }}" class="list-group"
-                data-prototype="{{ form_widget(value.vars.prototype)|e }}"
-                data-widget-tags="{{ '<li class="list-group-item"></li>'|e }}">
-                {% for item in value %}
-                    <li class="list-group-item">
-                        {{ form_errors(item) }}
-                        {{ form_widget(item, {attr: {class: '' ~ class_widget} }) }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div style="display: none;">
-            {{ form_row(value) }}
-        </div>
-    </div>
-{%- endmacro %}
-
-{% macro frm_field_file(value, item=null,class='', class_widget='') -%}
-    <div class="form-group m-form__group {{ class }}">
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-lg-3 col-sm-12'} }) }}
-        <div class="custom-file col-lg-4 col-md-9 col-sm-12">
-            {{ form_widget(value.file, {attr: {class: 'custom-file-input form-control m-input ' ~ class_widget} }) }}
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-        <div class="custom-file col-lg-4 col-md-9 col-sm-12">
-            {% if item %}
-                <label class="">
-                    {{ item.nombre }}
-                </label>
-            {% endif %}
-        </div>
-    </div>
-{%- endmacro %}
-
-{# ########## ALDAIR ################# #}
-
-{% macro btn_delete_modal(link, token) -%}
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#m_modal_1"> Eliminar</button>
-    <div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ¿ Esta seguro de eliminar este registro?
-                </div>
-                <div class="modal-footer">
-                    <form method="post" action="{{ link }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ token }}">
-                        <button class="btn">Delete</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-{%- endmacro %}
-
-######### NEW ##############
-
-{% macro frm_help(value) %}
-    {% set help = value.vars.help %}
-    {% set help_attr = value.vars.help_attr %}
-    {%- if help is not empty -%}
-        {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' form-text font-italic font-size-sm mb-0')|trim}) -%}
-        <span id="{{ value.vars.id }}_help"
-            {% for attrname, attrvalue in help_attr %}
-                {{ attrname }}="{{ attrvalue }}"
-            {% endfor %} >
-            {{ help }}
-        </span>
-    {%- endif -%}
+{% macro end(form, customAttr = {}) -%}
+    {{ form_end(form, {attr: customAttr}) }}
 {% endmacro %}
 
-
-{% macro frm_errors_class(value) %}
-    {%- if value is not null and value.vars.errors|length > 0 -%}
-        is-invalid
-    {%- endif -%}
-{% endmacro %}
-
-{% macro frm_errors(value) %}
-    {%- if value is not null and value.vars.errors|length > 0 -%}
-        <ul class="list-unstyled font-size-xs m-0">
-            {%- for error in value.vars.errors -%}
-                <li class="text-danger">{{ error.message }}</li>
-            {%- endfor -%}
-        </ul>
-
-    {%- endif -%}
-{% endmacro %}
-
-{% macro frm_column(section1, section2=null, section3=null, section4=null, num=1) %}
-    {% import _self as actions %}
-    <div class="row">
-        {% if section1 or num >=1 %}
-            <div class="col-sm">
-                {{ section1 | raw }}
-            </div>
+{% macro column(value, col = 2, class = '') -%}
+    {% import _self as action %}
+    <div class="row {{ class }}">
+        {% if col > 0 %}
+            <label class="col-form-label col-sm-{{ col }}" for="{{ value.vars.id }}">
+                {{ action.label(value) }}
+            </label>
         {% endif %}
-        {% if section2 or num >=2 %}
-            <div class="col-sm">
-                {{ section2 | raw }}
-            </div>
-        {% endif %}
-        {% if section3 or num >=3 %}
-            <div class="col-sm">
-                {{ section3 | raw }}
-            </div>
-        {% endif %}
-        {% if section4 or num >=4 %}
-            <div class="col-sm p-0">
-                {{ section4 | raw }}
-            </div>
-        {% endif %}
+        <div class="col-sm-{{ 12-col }}">
+            {{ form_widget(value) }}
+        </div>
     </div>
-{% endmacro %}
+{%- endmacro %}
 
-{% macro column2(value1, value2=null) %}
-    <div class="row">
-        <div class="col-sm-6">
+{% macro column2(value1, value2=null, col = 6, class = '') -%}
+    <div class="row {{  class }}">
+        <div class="col-sm-{{ col }}">
             {{ value1| raw }}
         </div>
         {% if value2 is not null %}
-            <div class="col-sm-6">
+            <div class="col-sm-{{ 12-col }}">
                 {{ value2| raw }}
             </div>
         {% endif %}
     </div>
-{% endmacro %}
+{%- endmacro %}
 
-{% macro frm_column_field(value, class='', class_widget='', col=4) %}
-    {% import _self as actions %}
-    <div class="form-group row mb-1 p-1 {{ class }} {{ actions.frm_errors_class(value) }}">
-{#        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}#}
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
-        <div class="col-sm-{{ 12-col }} col-8">
-            {{ form_widget(value, {attr: {class: 'form-control ' ~ class_widget ~ actions.frm_errors_class(value)} }) }}
-            {{ actions.frm_help(value) }}
-            {{ actions.frm_errors(value) }}
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro frm_column_field_select(value, class='', class_widget='', col=4, placeholder='Seleccione...') %}
-    {% import _self as actions %}
-    <div class="form-group row mb-1 p-1 {{ class }} {{ actions.frm_errors_class(value) }}">
-{#        {{ actions.frm_label(value,'col-sm-' ~ col ~ ' col-4') }}#}
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
-        <div class="col-sm-{{ 12-col }} col-8">
-            {{ form_widget(value, {attr: {class: 'js-select2 form-control form-select' ~ class_widget ~ actions.frm_errors_class(value), 'data-placeholder': placeholder | gtrans} }) }}
-            {{ actions.frm_help(value) }}
-            {{ actions.frm_errors(value) }}
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro frm_column_field_date(value, class='', class_widget='', col=4) %}
-    {% import _self as actions %}
-    <div class="form-group row {{ class }} {{ actions.frm_errors_class(value) }}">
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-4'} }) }}
-        <div class="col-sm-{{ 12-col }} col-8">
-            <div class="input-group mb-5">
-                {{ form_widget(value, {attr: {class: 'js-flatpickr form-control ' ~ class_widget ~ actions.frm_errors_class(value)} }) }}
-                <span class="input-group-text">
-                    <i class="fas fa-calendar-day fs-4"></i>
-                </span>
+{% macro columnX(values, width = 6, class = '') -%}
+    <div class="row {{  class }}">
+        {% for value in values %}
+            <div class="col-sm-{{ width }}">
+                {{ value | raw }}
             </div>
-            {{ actions.frm_help(value) }}
-            {{ actions.frm_errors(value) }}
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro frm_column_field_collection(value, class='', class_widget='', col=4) -%}
-    <div class="form-group m-form__group row {{ class }}">
-        {{ form_label(value,null, {label_attr: {class: 'col-form-label col-' ~ col} }) }}
-        <div class="col-{{- 12 - col -}}">
-            <ul id="{{ value.vars.id }}" class="list-group"
-                data-prototype="{{ form_widget(value.vars.prototype)|e }}"
-                    {% if value.vars.prototype.vars.name %} data-prototype-name="{{ value.vars.prototype.vars.name }}" {% endif %}
-                data-widget-tags="{{ '<li class="list-group-item"></li>'|e }}">
-                {% for item in value %}
-                    <li class="list-group-item">
-                        {{ form_errors(item) }}
-                        {{ form_widget(item, {attr: {class: '' ~ class_widget} }) }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        {% endfor %}
     </div>
 {%- endmacro %}
 
-{% macro frm_column_btn(label, class='', attributes = '', cols=4) %}
-    {% import _self as actions %}
-    <div class="form-group  row p-1 {{ class }}">
-        {% if cols > 0 %}
-            <div class="col-sm-{{ cols }}"></div>
-        {% endif %}
-        <div class="col-sm-{{ 12-cols }}">
-            {{ actions.btn_save(label, attributes) }}
-        </div>
-    </div>
+{% macro row(form, customAttr = {}) -%}
+    {{ form_row(form, {attr: customAttr}) }}
+{% endmacro %}
+
+{% macro button(button_label = null, button_class = 'warning offset-sm-2', attributes = '') -%}
+    <button class="btn btn-{{ button_class }} pt-3" {{ attributes }}>{{ button_label|default('Guardar') }}</button>
+{%- endmacro %}
+
+{% macro label(form) -%}
+    {% set label = form.vars.label %}
+    {% if label is empty -%}
+        {%- if form.vars.label_format is not empty -%}
+            {% set label = form.vars.label_format|replace({
+                '%name%': form.vars.name,
+                '%id%': form.vars.id,
+            }) %}
+        {%- else -%}
+            {% set label = form.vars.name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    {{ label }}
+{%- endmacro %}
+
+{% macro btn_show(url) %}
+    <a href="{{ url }}" class="btn btn-sm btn-light-primary" title="Mostrar"><i class="fa fa-eye"></i></a>
+{% endmacro %}
+
+{% macro btn_edit(url) %}
+    <a href="{{ url }}" class="btn btn-sm btn-light-warning" title="Editar"><i class="fa fa-pen"></i></a>
+{% endmacro %}
+
+{% macro btn_new(url) %}
+    <a href="{{ url }}" class="btn btn-sm btn-success" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</a>
 {% endmacro %}
