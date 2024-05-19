@@ -11,9 +11,7 @@
     {% import _self as action %}
     <div class="row {{ class }}">
         {% if col > 0 %}
-            <label class="col-form-label col-sm-{{ col }}" for="{{ value.vars.id }}">
-                {{ action.label(value) }}
-            </label>
+            {{ form_label(value, null, {'label_attr': {'class': 'col-sm-'~col}}) }}
         {% endif %}
         <div class="col-sm-{{ 12-col }}">
             {{ form_widget(value) }}
