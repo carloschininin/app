@@ -39,7 +39,7 @@ class MenuBuilder
     {
         $menuPaths = [];
         foreach ($menus as $menu) {
-            if (null !== $menu->getParent()) {
+            if (null !== $menu->getParent() || null !== $menu->getRoute()) {
                 $menuPaths[] = $menu->getRoute();
             }
         }

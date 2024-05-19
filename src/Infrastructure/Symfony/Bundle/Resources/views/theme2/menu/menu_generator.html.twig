@@ -15,6 +15,9 @@
         {% else %}
             <li class="nav-main-item">
                 <a class="nav-main-link {% if menu.selected is defined %}active{% endif %}" href="{{ path(menu.route) }}">
+                    {% if menu.icon %}
+                        <i class="nav-main-link-icon {{ menu.icon }}"></i>
+                    {% endif %}
                     <span class="nav-main-link-name">{{ menu.name | gtrans }}</span>
                     {% if menu.badge %}<span class="badge text-light-primary">{{ menu.badge }}</span>{% endif %}
                 </a>
