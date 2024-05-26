@@ -5,13 +5,14 @@
                 {% set routeParams = app.request.query.all %}
                 <ul class="pagination pagination-sm justify-content-center justify-content-sm-start">
                     <li class="page-item">
-                        <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: 1})) }}">
+                        <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: 1})) }}" data-page="1">
                             <i class="fa fa-angle-double-left kt-font-brand"></i>
                         </a>
                     </li>
                     <li class="page-item">
                         {% if paginator.hasPreviousPage %}
-                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.previousPage})) }}">
+                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.previousPage})) }}"
+                               data-page="{{ paginator.previousPage }}">
                                 <i class="fa fa-angle-left kt-font-brand"></i>
                             </a>
                         {% endif %}
@@ -27,7 +28,7 @@
 
                     {% for i in start..end %}
                         <li class="page-item {% if i == paginator.currentPage -%}active{%- endif -%}">
-                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: i}) ) }}">{{ i }}</a>
+                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: i}) ) }}" data-page="{{ i }}">{{ i }}</a>
                         </li>
                     {% endfor %}
 
@@ -39,13 +40,15 @@
 
                     <li class="page-item">
                         {% if paginator.hasNextPage %}
-                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.nextPage})) }}">
+                            <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.nextPage})) }}"
+                               data-page="{{ paginator.nextPage }}">
                                 <i class="fa fa-angle-right kt-font-brand"></i>
                             </a>
                         {% endif %}
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.lastPage})) }}">
+                        <a class="page-link" href="{{ path(route ~ '_paginated', routeParams | merge({page: paginator.lastPage})) }}"
+                           data-page="{{ paginator.lastPage }}">
                             <i class="fa fa-angle-double-right kt-font-brand"></i>
                         </a>
                     </li>
