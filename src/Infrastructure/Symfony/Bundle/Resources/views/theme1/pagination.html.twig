@@ -65,7 +65,7 @@
                         </select>
                     {% endif %}
                 </div>
-                <div class="col-6 col-sm-auto d-none d-block-sm">
+                <div class="col-6 col-sm-auto d-none d-sm-block d-block-sm">
                     <span class="form-text">
                         {% set total = (paginator.currentPage-1) * paginator.pageSize + 1 %}
                         de {{ total }} a {{ ( total - 1 ) + (paginator.results | length) }} de {{ paginator.count }} registros
