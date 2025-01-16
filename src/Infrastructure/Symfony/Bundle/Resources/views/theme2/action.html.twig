@@ -1,15 +1,15 @@
 {% macro btn_link(label, link, icon, btn_class='default',attributes='', title='') %}
     <a href="{{ link }}" title="{{ title|trans }}"
-       class="btn btn-alt-{{ btn_class }} btn-sm my-1" {{ attributes }}>
-        {% if icon %}<i class="{{ icon }} {% if label %} opacity-50 me-1 {% endif %}"></i>{% endif %}
+       class="btn btn-outline-{{ btn_class }} btn-sm border-0 my-1" {{ attributes }}>
+        {% if icon %}<i class="{{ icon }} {% if label %} me-1 {% endif %}"></i>{% endif %}
         {% if label %}<span>{{ label|trans }}</span>{% endif %}
     </a>
 {% endmacro %}
 
 {% macro btn_link_ico(link, icon, class='default',attributes='', title='') %}
-    <a href="{{ link }}" title="{{ title|trans }}"
-       class="btn-block-option" {{ attributes }}>
-        <i class="{{ icon }} "></i>
+    <a href="{{ link }}" data-bs-toggle="tooltip" title="{{ title|trans }}"
+       class="btn btn-sm btn-outline-{{ class }} border-0" {{ attributes }}>
+        <i class="{{ icon }}"></i>
     </a>
 {% endmacro %}
 
@@ -88,9 +88,9 @@
           style="display: inline">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ token }}">
-        <button class="js-swal-confirm btn btn-sm btn-alt-danger">
+        <button class="js-swal-confirm btn btn-sm btn-outline-danger border-0 opacity-75">
             <i class="fa fa-ban opacity-50 me-1"></i>
-            <span>Inhabilitar</span>
+            Inhabilitar
         </button>
     </form>
 {% endmacro %}
@@ -100,7 +100,7 @@
           style="display: inline">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ token }}">
-        <button class="btn-block-option" data-toggle="tooltip" title="Inhabilitar">
+        <button class="btn btn-sm btn-outline-danger border-0 opacity-75" data-bs-toggle="tooltip" title="Inhabilitar">
             <i class="fa fa-ban"></i>
         </button>
     </form>
@@ -111,7 +111,7 @@
           style="display: inline">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ token }}">
-        <button class="btn btn-sm btn-alt-warning">
+        <button class="btn btn-sm btn-outline-warning border-0">
             <span>
                 <i class="fa fa-redo"></i>
                 <span>Habilitar</span>
@@ -125,7 +125,7 @@
           style="display: inline">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ token }}">
-        <button class="btn-block-option" data-toggle="tooltip" title="Habilitar">
+        <button class="btn btn-sm btn-outline-warning border-0" data-bs-toggle="tooltip" title="Habilitar">
             <i class="fa fa-redo"></i>
         </button>
     </form>
@@ -136,7 +136,7 @@
           style="display: inline">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ token }}">
-        <button class="btn  btn-outline-danger btn-light btn-sm border-0">
+        <button class="btn btn-outline-danger btn-sm border-0">
             <span>
                 <i class="fa fa-trash-can"></i>
                 <span>Eliminar</span>
@@ -150,16 +150,16 @@
           style="display: inline">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ token }}">
-        <button class="btn-block-option" data-toggle="tooltip" title="Eliminar">
-            <i class="fa fa-trash-can text-danger"></i>
+        <button class="btn btn-sm btn-outline-danger border-0" data-bs-toggle="tooltip" title="Eliminar">
+            <i class="fa fa-trash-can"></i>
         </button>
     </form>
 {% endmacro %}
 
 
 {% macro btn_link2(label, link, icon, btn_class='default',attributes='', title='') %}
-    <a href="{{ link }}" class="btn btn-sm btn-outline-light btn-icon border-0" {{ attributes }} title="{{ title | trans }}" >
-        {% if icon %}<i class="{{ icon }} text-{{ btn_class }}"></i>{% endif %}
+    <a href="{{ link }}" class="btn btn-sm btn-outline-{{ btn_class }} border-0" {{ attributes }} data-bs-toggle="tooltip" title="{{ title | trans }}" >
+        {% if icon %}<i class="{{ icon }}"></i>{% endif %}
         {% if label %}<span>{{ label|trans }}</span>{% endif %}
     </a>
 {% endmacro %}
