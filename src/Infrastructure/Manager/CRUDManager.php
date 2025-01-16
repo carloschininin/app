@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA.
+ * This file is part of the PIDIA
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -68,7 +68,9 @@ class CRUDManager extends BaseManager
      */
     public function dataExport(ParamFetcher $params, bool $inArray = false): array
     {
-        return $this->repository->filter($params, $inArray, [Permission::EXPORT_ALL]);
+        $query = $this->repository->filterExportQuery($params, [Permission::EXPORT_ALL])->getQuery();
+
+        return true === $inArray ? $query->getArrayResult() : $query->getResult();
     }
 
     /**
@@ -78,7 +80,7 @@ class CRUDManager extends BaseManager
     {
         $limit = $params->getNullableInt('limit') ?? $params->getNullableInt('n');
         $pagination = PaginationDto::create($page, $limit ?? self::PAGE_LIMIT);
-        $dataQuery = $this->repository->filterQuery($params, [Permission::LIST_ALL]);
+        $dataQuery = $this->repository->filterPaginateQuery($params, [Permission::LIST_ALL]);
 
         return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
     }
@@ -87,11 +89,12 @@ class CRUDManager extends BaseManager
         array $items,
         array $headers,
         string $fileName = 'export',
-        WriterOptions $options = new WriterOptions()
+        WriterOptions $options = new WriterOptions(),
     ): Response {
         $export = new SpreadsheetWriter($items, $headers, $options);
+        $now = (new \DateTime())->format('ymd_Hi');
 
-        return $export->execute(false)->download($fileName);
+        return $export->execute(false)->download($fileName.'_'.$now);
     }
 
     /**

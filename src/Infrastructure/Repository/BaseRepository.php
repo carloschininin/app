@@ -62,6 +62,16 @@ abstract class BaseRepository extends ServiceEntityRepository
         }
     }
 
+    public function filterPaginateQuery(ParamFetcher|array $params, array $permissions = []): QueryBuilder
+    {
+        return $this->filterQuery($params, $permissions);
+    }
+
+    public function filterExportQuery(ParamFetcher|array $params, array $permissions = []): QueryBuilder
+    {
+        return $this->filterQuery($params, $permissions);
+    }
+
     abstract public function filterQuery(ParamFetcher|array $params, array $permissions = []): QueryBuilder;
 
     abstract public function allQuery(): QueryBuilder;
