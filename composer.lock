@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/carloschininin/util.git",
-                "reference": "9447d270c2a90395683aa8ae315a2e3dd6f91a3d"
+                "reference": "fae96d4e3b3bb89de1076b9603a221e6f4775ebd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carloschininin/util/zipball/9447d270c2a90395683aa8ae315a2e3dd6f91a3d",
-                "reference": "9447d270c2a90395683aa8ae315a2e3dd6f91a3d",
+                "url": "https://api.github.com/repos/carloschininin/util/zipball/fae96d4e3b3bb89de1076b9603a221e6f4775ebd",
+                "reference": "fae96d4e3b3bb89de1076b9603a221e6f4775ebd",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +108,7 @@
                 "issues": "https://github.com/carloschininin/util/issues",
                 "source": "https://github.com/carloschininin/util/tree/master"
             },
-            "time": "2025-01-14T07:10:59+00:00"
+            "time": "2025-01-17T04:55:56+00:00"
         },
         {
             "name": "doctrine/cache",

@@ -76,13 +76,13 @@ class CRUDManager extends BaseManager
     /**
      * @return PaginatedData<T>
      */
-    public function paginate(int $page, ParamFetcher $params): PaginatedData
+    public function paginate(int $page, ParamFetcher $params, bool $isComplexDQL = false): PaginatedData
     {
         $limit = $params->getNullableInt('limit') ?? $params->getNullableInt('n');
         $pagination = PaginationDto::create($page, $limit ?? self::PAGE_LIMIT);
         $dataQuery = $this->repository->filterPaginateQuery($params, [Permission::LIST_ALL]);
 
-        return (new DoctrinePaginator())->paginate($dataQuery, $pagination);
+        return (new DoctrinePaginator())->paginate($dataQuery, $pagination, $isComplexDQL);
     }
 
     public function export(
