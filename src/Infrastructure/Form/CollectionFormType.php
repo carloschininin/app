@@ -19,6 +19,7 @@ class CollectionFormType extends AbstractType
 {
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
+        $view->vars['btn_class'] = $options['btn_class'] ?? null;
         $view->vars['btn_title'] = $options['btn_title'] ?? null;
         $view->vars['btn_top'] = $options['btn_top'];
         $view->vars['add_last'] = $options['add_last'];
@@ -27,6 +28,7 @@ class CollectionFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'btn_class' => null,
             'btn_title' => null,
             'btn_top' => false,
             'add_last' => true,
