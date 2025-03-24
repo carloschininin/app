@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 
+use CarlosChininin\App\Infrastructure\Util\DateFormatter;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class DateRuntime implements RuntimeExtensionInterface
@@ -18,17 +19,17 @@ class DateRuntime implements RuntimeExtensionInterface
 
     public function __construct()
     {
-        $this->days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
+        $this->days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         $this->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     }
 
-    public function dateFilter(?\DateTimeInterface $date, ?string $format = 'd-m-Y'): string
+    public function dateFilter(?\DateTimeInterface $date, ?string $pattern = 'd-m-Y'): ?string
     {
         if (null === $date) {
             return '';
         }
 
-        return $date->format($format);
+        return DateFormatter::format($date, $pattern);
     }
 
     public function dateMediumFilter(?\DateTimeInterface $date): string
