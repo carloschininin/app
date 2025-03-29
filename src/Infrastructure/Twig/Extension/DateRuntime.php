@@ -23,13 +23,13 @@ class DateRuntime implements RuntimeExtensionInterface
         $this->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     }
 
-    public function dateFilter(?\DateTimeInterface $date, ?string $pattern = 'd-m-Y'): ?string
+    public function dateFilter(?\DateTimeInterface $date, string $pattern = 'd-m-Y', bool $useFormatter = false): ?string
     {
         if (null === $date) {
             return '';
         }
 
-        return DateFormatter::format($date, $pattern);
+        return $useFormatter ? DateFormatter::format($date, $pattern) : $date->format($pattern);
     }
 
     public function dateMediumFilter(?\DateTimeInterface $date): string
