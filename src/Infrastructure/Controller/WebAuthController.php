@@ -22,8 +22,8 @@ abstract class WebAuthController extends WebController
 
     protected function denyAccess(
         array $permissions,
-        object $entity = null,
-        string $menuRoute = null,
+        ?object $entity = null,
+        ?string $menuRoute = null,
         string $message = 'Acceso denegado...'
     ): void {
         $menuRoute = $menuRoute ?? static::BASE_ROUTE;
@@ -36,7 +36,7 @@ abstract class WebAuthController extends WebController
         return $this->security->isSuperAdmin();
     }
 
-    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    protected function render(string $view, array $parameters = [], ?Response $response = null): Response
     {
         $parameters = array_merge($parameters, ['access' => $this->security]);
 

@@ -67,7 +67,7 @@ final class Security
     }
 
     /** @param Permission[] $permissions */
-    public function checkGrantedAccess(array $permissions, string $menuRoute = null, object $entity = null): bool
+    public function checkGrantedAccess(array $permissions, ?string $menuRoute = null, ?object $entity = null): bool
     {
         if ($this->isSuperAdmin()) {
             return true;
@@ -110,7 +110,7 @@ final class Security
         return false;
     }
 
-    public function denyAccessUnlessGranted(array $permissions, string $menuRoute = null, object $entity = null, string $message = 'access_denied'): void
+    public function denyAccessUnlessGranted(array $permissions, ?string $menuRoute = null, ?object $entity = null, string $message = 'access_denied'): void
     {
         if (!$this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
             $exception = new AccessDeniedException($message);
@@ -149,53 +149,53 @@ final class Security
         return $this->permissionCheck(Permission::LIST, Permission::LIST_ALL);
     }
 
-    public function show(AuthUser $owner = null): bool
+    public function show(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::SHOW, Permission::SHOW_ALL, $owner);
     }
 
-    public function edit(AuthUser $owner = null): bool
+    public function edit(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::EDIT, Permission::EDIT_ALL, $owner);
     }
 
-    public function enable(AuthUser $owner = null): bool
+    public function enable(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::ENABLE, Permission::ENABLE_ALL, $owner);
     }
 
-    public function disable(AuthUser $owner = null): bool
+    public function disable(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::DISABLE, Permission::DISABLE_ALL, $owner);
     }
 
-    public function print(AuthUser $owner = null): bool
+    public function print(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::PRINT, Permission::PRINT_ALL, $owner);
     }
 
-    public function report(AuthUser $owner = null): bool
+    public function report(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::REPORT, Permission::REPORT_ALL, $owner);
     }
 
-    public function export(AuthUser $owner = null): bool
+    public function export(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::EXPORT, Permission::EXPORT_ALL, $owner);
     }
 
-    public function import(AuthUser $owner = null): bool
+    public function import(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::IMPORT, Permission::IMPORT_ALL, $owner);
     }
 
-    public function delete(AuthUser $owner = null): bool
+    public function delete(?AuthUser $owner = null): bool
     {
         return $this->permissionCheck(Permission::DELETE, Permission::DELETE_ALL, $owner);
     }
 
     /** @deprecated User functions new, list, edit, etc */
-    public function has(string $attribute, object $object = null, string $menuRoute = null): bool
+    public function has(string $attribute, ?object $object = null, ?string $menuRoute = null): bool
     {
         $menuRoute = $menuRoute ?? $this->menuRoute;
         $permission = Permission::byValue($attribute);
@@ -203,7 +203,7 @@ final class Security
         return $this->checkGrantedAccess([$permission], $menuRoute, $object);
     }
 
-    public function filterQuery(QueryBuilder $queryBuilder, string $menuRoute = null, array $permissions = []): void
+    public function filterQuery(QueryBuilder $queryBuilder, ?string $menuRoute = null, array $permissions = []): void
     {
         if ($this->isSuperAdmin()) {
             return;
@@ -218,7 +218,7 @@ final class Security
             ->setParameter('ownerId', $this->user()->getId());
     }
 
-    private function permissionCheck(Permission $permission, Permission $permissionAll, AuthUser $owner = null): bool
+    private function permissionCheck(Permission $permission, Permission $permissionAll, ?AuthUser $owner = null): bool
     {
         return
             $this->master()
