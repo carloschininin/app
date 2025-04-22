@@ -15,7 +15,7 @@ use Doctrine\DBAL\Types\JsonType;
 
 final class MenuPermissionType extends JsonType
 {
-    public const NAME = 'menu_permission_json';
+    public const string NAME = 'menu_permission_json';
 
     public function getName(): string
     {

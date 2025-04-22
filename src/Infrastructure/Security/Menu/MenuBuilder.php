@@ -16,7 +16,7 @@ use CarlosChininin\App\Infrastructure\Security\Security;
 
 class MenuBuilder
 {
-    public const SUBLEVEL = 'submenu';
+    public const string SUBLEVEL = 'submenu';
 
     public function __construct(private readonly Security $security)
     {

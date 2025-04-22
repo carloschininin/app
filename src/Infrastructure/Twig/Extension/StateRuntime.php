@@ -12,10 +12,10 @@ namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final class StateRuntime implements RuntimeExtensionInterface
+readonly final class StateRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private readonly TranslatorInterface $translator
+        private TranslatorInterface $translator
     ) {
     }
 

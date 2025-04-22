@@ -16,7 +16,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class TranslationRuntime implements RuntimeExtensionInterface
 {
-    public const CACHE_TAG = 'GTRANS_';
+    public const string CACHE_TAG = 'GTRANS_';
 
     public function __construct(
         private readonly TranslatorInterface $translator,

@@ -14,7 +14,7 @@ use CarlosChininin\App\Infrastructure\Security\Permission;
 
 final class PermissionType extends AbstractEnumType
 {
-    public const NAME = 'permission';
+    public const string NAME = 'permission';
 
     public function getName(): string // the name of the type.
     {

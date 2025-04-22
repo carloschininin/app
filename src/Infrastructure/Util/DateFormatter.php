@@ -4,7 +4,7 @@ namespace CarlosChininin\App\Infrastructure\Util;
 
 class DateFormatter
 {
-    private const FORMAT_MAP = [
+    private const array FORMAT_MAP = [
         'd' => 'dd', 'j' => 'd', 'm' => 'MM', 'n' => 'M',
         'Y' => 'yyyy', 'y' => 'yy', 'F' => 'MMMM', 'M' => 'MMM',
         'l' => 'EEEE', 'D' => 'EEE', 'H' => 'HH', 'G' => 'H',

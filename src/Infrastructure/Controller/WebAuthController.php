@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class WebAuthController extends WebController
 {
-    public const BASE_ROUTE = 'undefined';
+    public const string BASE_ROUTE = 'undefined';
 
     public function __construct(private readonly Security $security)
     {

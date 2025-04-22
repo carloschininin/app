@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CRUDManager extends BaseManager
 {
-    public const PAGE_LIMIT = 5;
+    public const int PAGE_LIMIT = 5;
 
     public function __construct(
         private readonly BaseRepository $repository,

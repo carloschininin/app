@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace CarlosChininin\App\Infrastructure\Security;
 
-final class MenuPermission implements \JsonSerializable, \Stringable
+readonly final class MenuPermission implements \JsonSerializable, \Stringable
 {
     public function __construct(
-        private readonly string $menu,
-        private readonly array $attributes,
+        private string $menu,
+        private array $attributes,
     ) {
     }
 
