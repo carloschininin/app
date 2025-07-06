@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f543dc2acc17c4222fab996b4d252ee5",
+    "content-hash": "c548424d1a77654b5a8110d88328d946",
     "packages": [
         {
             "name": "carloschininin/php-spreadsheet",
@@ -59,31 +59,35 @@
         },
         {
             "name": "carloschininin/util",
-            "version": "0.0.4",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/carloschininin/util.git",
-                "reference": "92346336eb4dd6bc5fe55d0338adb96c32a49fb5"
+                "reference": "89c7db73632b9d809b7a6003a6ec3718483a805e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carloschininin/util/zipball/92346336eb4dd6bc5fe55d0338adb96c32a49fb5",
-                "reference": "92346336eb4dd6bc5fe55d0338adb96c32a49fb5",
+                "url": "https://api.github.com/repos/carloschininin/util/zipball/89c7db73632b9d809b7a6003a6ec3718483a805e",
+                "reference": "89c7db73632b9d809b7a6003a6ec3718483a805e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^2.8|^3.0",
+                "doctrine/orm": "^2.0|^3.0",
+                "ext-mbstring": "*",
                 "ext-zip": "*",
                 "lambdish/phunctional": "^2.1",
-                "php": "^8.1",
-                "symfony/http-foundation": "^5.4|^6.0|^7.0",
-                "symfony/string": "^5.4|^6.0|^7.0",
+                "php": "^8.3",
+                "symfony/http-foundation": "^6.0|^7.0",
+                "symfony/string": "^6.0|^7.0",
                 "webmozart/assert": "^1.10"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.50",
                 "fzaninotto/faker": "^1.9",
-                "phpunit/phpunit": "^9.5|^10.0"
+                "laravel/pint": "^1.22",
+                "phpunit/phpunit": "^10.0"
+            },
+            "suggest": {
+                "ext-bcmath": "PHP Extensión de Matemáticas de precisión arbitraria"
             },
             "type": "library",
             "autoload": {
@@ -104,9 +108,9 @@
             "description": "Utilities",
             "support": {
                 "issues": "https://github.com/carloschininin/util/issues",
-                "source": "https://github.com/carloschininin/util/tree/0.0.4"
+                "source": "https://github.com/carloschininin/util/tree/0.1.1"
             },
-            "time": "2025-01-17T05:11:35+00:00"
+            "time": "2025-07-05T18:11:32+00:00"
         },
         {
             "name": "composer/pcre",

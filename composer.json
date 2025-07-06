@@ -14,7 +14,7 @@
   "require": {
     "php": "^8.3",
     "carloschininin/php-spreadsheet": "^0.1",
-    "carloschininin/util": "^0.0",
+    "carloschininin/util": "^0.1",
     "doctrine/dbal": "^4.0",
     "doctrine/doctrine-bundle": "^2.5",
     "doctrine/orm": "^3.0",
