@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -35,6 +35,7 @@ abstract class AbstractEnumType extends Type
         if (false === enum_exists($this->getEnumsClass())) {
             throw new \LogicException('This class should be an enum');
         }
+
         // 🔥 https://www.php.net/manual/en/backedenum.tryfrom.php
         return $this::getEnumsClass()::tryFrom($value);
     }

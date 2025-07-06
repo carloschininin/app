@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -86,9 +86,9 @@ class CRUDManager extends BaseManager
     }
 
     /**
-     * @return PaginatedData<T>
-     *
      * @throws \Exception
+     *
+     * @return PaginatedData<T>
      */
     public function paginator(mixed $dataQuery, PaginationDto $pagination, bool $isComplexDQL = false): PaginatedData
     {

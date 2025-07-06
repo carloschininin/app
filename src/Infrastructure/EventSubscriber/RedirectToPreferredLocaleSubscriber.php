@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -25,7 +25,7 @@ final class RedirectToPreferredLocaleSubscriber implements EventSubscriberInterf
         string $locales,
         ?string $defaultLocale = null,
     ) {
-        $this->locales = explode('|', trim($locales));
+        $this->locales = explode('|', mb_trim($locales));
         if (empty($this->locales)) {
             throw new \UnexpectedValueException('The list of supported locales must not be empty.');
         }

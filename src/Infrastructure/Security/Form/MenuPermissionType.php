@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class MenuPermissionType extends AbstractType implements DataMapperInterface
 {
     public function __construct(
-        private readonly MenuServiceInterface $menuService
+        private readonly MenuServiceInterface $menuService,
     ) {
     }
 

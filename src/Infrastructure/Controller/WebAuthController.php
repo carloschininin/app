@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -24,7 +24,7 @@ abstract class WebAuthController extends WebController
         array $permissions,
         ?object $entity = null,
         ?string $menuRoute = null,
-        string $message = 'Acceso denegado...'
+        string $message = 'Acceso denegado...',
     ): void {
         $menuRoute = $menuRoute ?? static::BASE_ROUTE;
 

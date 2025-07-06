@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -12,10 +12,10 @@ namespace CarlosChininin\App\Infrastructure\Twig\Extension;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
-readonly final class StateRuntime implements RuntimeExtensionInterface
+final readonly class StateRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private TranslatorInterface $translator
+        private TranslatorInterface $translator,
     ) {
     }
 

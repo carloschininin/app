@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -19,7 +19,7 @@ class ExportManager extends BaseManager
         array $items,
         array $headers,
         string $fileName = 'export',
-        WriterOptions $options = new WriterOptions()
+        WriterOptions $options = new WriterOptions(),
     ): Response {
         $export = new SpreadsheetWriter($items, $headers, $options);
 
