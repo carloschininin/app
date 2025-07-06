@@ -19,7 +19,7 @@ abstract class ApiController extends AbstractController
     public function denyAccessUnlessAuthorization(Request $request): void
     {
         $authorization = $this->authorization($request);
-        if (!$authorization['status']) {
+        if (! $authorization['status']) {
             throw new \InvalidArgumentException($authorization['message']);
         }
     }
@@ -31,7 +31,7 @@ abstract class ApiController extends AbstractController
 
     protected function authorization(Request $request): array
     {
-        if (!$request->headers->has('Authorization') || 0 !== mb_strpos($request->headers->get('Authorization'), 'Bearer ')) {
+        if (! $request->headers->has('Authorization') || mb_strpos($request->headers->get('Authorization'), 'Bearer ') !== 0) {
             return ['status' => false, 'message' => 'No tiene autorización'];
         }
 

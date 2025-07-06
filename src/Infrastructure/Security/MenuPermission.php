@@ -14,10 +14,9 @@ final readonly class MenuPermission implements \JsonSerializable, \Stringable
     public function __construct(
         private string $menu,
         private array $attributes,
-    ) {
-    }
+    ) {}
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->menu();
     }
