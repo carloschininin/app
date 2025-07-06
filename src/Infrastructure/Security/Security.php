@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the PIDIA
+ * This file is part of the PIDIA.
  * (c) Carlos Chininin <cio@pidia.pe>
  */
 
@@ -19,18 +19,20 @@ final class Security
     public const string ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
 
     private ?AuthUser $user = null;
+
     private ?array $auths = null;
+
     private ?string $menuRoute = null;
+
     private ?bool $isSuperAdmin = null;
 
     public function __construct(
-        private readonly TokenStorageInterface $tokenStorage
-    ) {
-    }
+        private readonly TokenStorageInterface $tokenStorage,
+    ) {}
 
     public function user(): AuthUser
     {
-        if (null === $this->user) {
+        if ($this->user === null) {
             $this->user = $this->tokenStorage->getToken()->getUser();
         }
 
@@ -39,7 +41,7 @@ final class Security
 
     public function auths(): array
     {
-        if (null !== $this->auths) {
+        if ($this->auths !== null) {
             return $this->auths;
         }
 
@@ -59,7 +61,7 @@ final class Security
 
     public function isSuperAdmin(): bool
     {
-        if (null === $this->isSuperAdmin) {
+        if ($this->isSuperAdmin === null) {
             $this->isSuperAdmin = self::verifyRole(self::ROLE_SUPER_ADMIN, $this->user());
         }
 
@@ -74,13 +76,13 @@ final class Security
         }
 
         $this->menuRoute = $menuRoute ?? $this->menuRoute;
-        if (null === $this->menuRoute) {
+        if ($this->menuRoute === null) {
             throw new \InvalidArgumentException('especifique el menuRoute');
         }
 
         $auths = $this->auths();
 
-        if (!isset($auths[$menuRoute])) {
+        if (! isset($auths[$menuRoute])) {
             return false;
         }
 
@@ -112,7 +114,7 @@ final class Security
 
     public function denyAccessUnlessGranted(array $permissions, ?string $menuRoute = null, ?object $entity = null, string $message = 'access_denied'): void
     {
-        if (!$this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
+        if (! $this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
             $exception = new AccessDeniedException($message);
             $exception->setAttributes([$permissions]);
             $exception->setSubject($menuRoute);
@@ -123,15 +125,21 @@ final class Security
 
     public function isOwner(?object $entity): bool
     {
-        if (null === $entity) {
+        if ($entity === null) {
             return true;
         }
 
-        if (!method_exists($entity, 'owner')) {
-            return false;
+        // Soporte para entidades
+        if (method_exists($entity, 'owner')) {
+            return $entity->owner()?->getUserIdentifier() === $this->user()->getUserIdentifier();
         }
 
-        return $entity->owner()?->getUserIdentifier() === $this->user()->getUserIdentifier();
+        // Soporte para DTOs con propiedad ownerId
+        if (property_exists($entity, 'ownerId')) {
+            return $entity->ownerId === $this->user()->getId();
+        }
+
+        return false;
     }
 
     public function master(): bool
