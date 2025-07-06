@@ -134,9 +134,13 @@ final class Security
             return $entity->owner()?->getUserIdentifier() === $this->user()->getUserIdentifier();
         }
 
-        // Soporte para DTOs con propiedad ownerId
+        // Soporte para DTOs
         if (property_exists($entity, 'ownerId')) {
             return $entity->ownerId === $this->user()->getId();
+        }
+
+        if (method_exists($entity, 'getOwnerId')) {
+            return $entity->getOwnerId() === $this->user()->getId();
         }
 
         return false;
