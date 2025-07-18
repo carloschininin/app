@@ -82,7 +82,7 @@ final class Security
 
         $auths = $this->auths();
 
-        if (! isset($auths[$menuRoute])) {
+        if (isset($auths[$menuRoute]) === false) {
             return false;
         }
 
@@ -114,7 +114,7 @@ final class Security
 
     public function denyAccessUnlessGranted(array $permissions, ?string $menuRoute = null, ?object $entity = null, string $message = 'access_denied'): void
     {
-        if (! $this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
+        if (!$this->checkGrantedAccess($permissions, $menuRoute, $entity)) {
             $exception = new AccessDeniedException($message);
             $exception->setAttributes([$permissions]);
             $exception->setSubject($menuRoute);

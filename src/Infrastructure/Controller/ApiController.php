@@ -19,7 +19,7 @@ abstract class ApiController extends AbstractController
     public function denyAccessUnlessAuthorization(Request $request): void
     {
         $authorization = $this->authorization($request);
-        if (! $authorization['status']) {
+        if (!$authorization['status']) {
             throw new \InvalidArgumentException($authorization['message']);
         }
     }
