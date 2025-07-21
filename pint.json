@@ -6,8 +6,6 @@
     "vendor"
   ],
   "rules": {
-    "blank_line_between_import_groups": false,
-    "declare_strict_types": true,
     "header_comment": {
       "header": "This file is part of the PIDIA.\n(c) Carlos Chininin <cio@pidia.pe>",
       "separate": "both"
@@ -18,13 +16,13 @@
     "no_unreachable_default_argument_value": true,
     "no_useless_else": true,
     "no_useless_return": true,
-    "ordered_imports": {
-      "sort_algorithm": "alpha"
-    },
     "php_unit_strict": true,
     "phpdoc_order": true,
     "strict_comparison": true,
     "strict_param": true,
-    "unary_operator_spaces": true
+    "blank_line_between_import_groups": false,
+    "declare_strict_types": true,
+    "not_operator_with_successor_space": false,
+    "yoda_style": false
   }
 }

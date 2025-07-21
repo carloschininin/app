@@ -28,11 +28,12 @@ final class Security
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
-    ) {}
+    ) {
+    }
 
     public function user(): AuthUser
     {
-        if ($this->user === null) {
+        if (null === $this->user) {
             $this->user = $this->tokenStorage->getToken()->getUser();
         }
 
@@ -41,7 +42,7 @@ final class Security
 
     public function auths(): array
     {
-        if ($this->auths !== null) {
+        if (null !== $this->auths) {
             return $this->auths;
         }
 
@@ -61,7 +62,7 @@ final class Security
 
     public function isSuperAdmin(): bool
     {
-        if ($this->isSuperAdmin === null) {
+        if (null === $this->isSuperAdmin) {
             $this->isSuperAdmin = self::verifyRole(self::ROLE_SUPER_ADMIN, $this->user());
         }
 
@@ -76,13 +77,13 @@ final class Security
         }
 
         $this->menuRoute = $menuRoute ?? $this->menuRoute;
-        if ($this->menuRoute === null) {
+        if (null === $this->menuRoute) {
             throw new \InvalidArgumentException('especifique el menuRoute');
         }
 
         $auths = $this->auths();
 
-        if (isset($auths[$menuRoute]) === false) {
+        if (false === isset($auths[$menuRoute])) {
             return false;
         }
 
@@ -125,7 +126,7 @@ final class Security
 
     public function isOwner(?object $entity): bool
     {
-        if ($entity === null) {
+        if (null === $entity) {
             return true;
         }
 
@@ -148,12 +149,12 @@ final class Security
 
     public function master(): bool
     {
-        return $this->isSuperAdmin() || \in_array(Permission::MASTER, $this->authsMenu(), true);
+        return $this->isSuperAdmin() || \in_array(Permission::MASTER->value, $this->authsMenu(), true);
     }
 
     public function new(): bool
     {
-        return $this->master() || \in_array(Permission::NEW, $this->authsMenu(), true);
+        return $this->master() || \in_array(Permission::NEW->value, $this->authsMenu(), true);
     }
 
     public function list(): bool
@@ -232,13 +233,14 @@ final class Security
 
     private function permissionCheck(Permission $permission, Permission $permissionAll, ?AuthUser $owner = null): bool
     {
-        return
-            $this->master()
-            || \in_array($permissionAll->value, $this->authsMenu(), true)
-            || (
-                \in_array($permission->value, $this->authsMenu(), true)
-                && $this->isOwner($owner)
-            );
+        if ($this->master()) {
+            return true;
+        }
+
+        $authsMenu = $this->authsMenu();
+
+        return in_array($permissionAll->value, $authsMenu, true)
+            || (in_array($permission->value, $authsMenu, true) && $this->isOwner($owner));
     }
 
     private function authsMenu(): array

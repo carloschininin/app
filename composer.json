@@ -1,6 +1,7 @@
 {
   "name": "carloschininin/app",
   "description": "Utilities for applications",
+  "version": "0.1.6",
   "type": "library",
   "license": "proprietary",
   "minimum-stability": "dev",
@@ -30,7 +31,8 @@
     "twig/twig": "^3.10"
   },
   "require-dev": {
-    "laravel/pint": "^1.22"
+    "laravel/pint": "^1.22",
+    "phpunit/phpunit": "^11.2"
   },
   "config": {
     "optimize-autoloader": true,

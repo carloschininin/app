@@ -31,7 +31,7 @@ abstract class ApiController extends AbstractController
 
     protected function authorization(Request $request): array
     {
-        if (! $request->headers->has('Authorization') || mb_strpos($request->headers->get('Authorization'), 'Bearer ') !== 0) {
+        if (!$request->headers->has('Authorization') || mb_strpos($request->headers->get('Authorization'), 'Bearer ') !== 0) {
             return ['status' => false, 'message' => 'No tiene autorización'];
         }
 
