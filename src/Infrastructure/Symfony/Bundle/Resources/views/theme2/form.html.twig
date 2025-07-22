@@ -47,7 +47,7 @@
 {% endmacro %}
 
 {% macro button(button_label, button_class = 'warning offset-sm-2', attributes = '') -%}
-    <button class="btn btn-{{ button_class }} " {{ attributes }}>{{ button_label }}</button>
+    <button class="btn-submit-form btn btn-{{ button_class }} " {{ attributes }}>{{ button_label }}</button>
 {%- endmacro %}
 
 {% macro label(form) -%}
