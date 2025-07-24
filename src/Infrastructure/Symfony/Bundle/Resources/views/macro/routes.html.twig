@@ -1,0 +1,3 @@
+{% macro data(routes) %}
+    <div data-routes="{{ routes|json_encode|e('html_attr') }}" style="display: none;"></div>
+{% endmacro %}  
