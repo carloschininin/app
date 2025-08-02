@@ -49,6 +49,8 @@ const addFormToCollection = (e) => {
 
     collectionHolder.dataset.index++;
     addCollectionItemLink();
+
+    document.dispatchEvent(new CustomEvent('addCollectionItemEvent'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

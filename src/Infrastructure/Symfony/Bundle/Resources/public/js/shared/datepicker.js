@@ -1,15 +1,7 @@
-// import "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+import "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+
 import "bootstrap-datepicker/dist/js/bootstrap-datepicker.min"
 import "bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min"
-
-const btnAddItems = document.querySelectorAll('.add_collection_item');
-btnAddItems.forEach(item => {
-    item.addEventListener('click', () => {
-        setTimeout(() => {
-            Datepicker();
-        }, 100);
-    })
-})
 
 const Datepicker = function () {
     $(".js-datepicker:not(.js-datepicker-enabled)")
@@ -19,7 +11,7 @@ const Datepicker = function () {
 
             el.addClass("js-datepicker-enabled").datepicker({
                 weekStart: el.data("week-start") || 0,
-                autoclose: el.data("autoclose") || false,
+                autoclose: el.data("autoclose") || true,
                 todayHighlight: el.data("today-highlight") || false,
                 startDate: el.data("start-date") || false,
                 container: el.data("container") || "#page-container",
@@ -33,4 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Datepicker();
 })
 
+document.addEventListener('addCollectionItemEvent', () => {
+    Datepicker();
+})
+
 window.Datepicker = Datepicker;
+export default Datepicker;

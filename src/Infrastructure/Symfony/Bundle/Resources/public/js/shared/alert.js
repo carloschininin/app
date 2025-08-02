@@ -1,7 +1,7 @@
 import Swal from "sweetalert2/dist/sweetalert2.min"
 import "sweetalert2/dist/sweetalert2.min.css"
 
-export let Alert = function () {
+const Alert = function () {
 
     let e = Swal.mixin({
         buttonsStyling: false,
@@ -35,3 +35,4 @@ export let Alert = function () {
 }();
 
 window.Alert = Alert;
+export default Alert;

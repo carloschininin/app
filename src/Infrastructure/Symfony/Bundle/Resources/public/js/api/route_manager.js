@@ -1,4 +1,4 @@
-class RouteManager {
+export class RouteManager {
     constructor() {
         this.routes = new Map();
         this.initialized = false;

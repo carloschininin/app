@@ -1,4 +1,4 @@
-import { exportData } from './export_data';
+import exportData from './export_data';
 
 const listFilter = function (urlExport=null, filenameExport=''){
     const formFilter = document.querySelector('#form_filter') || document.querySelector('[name="form_filter"]');

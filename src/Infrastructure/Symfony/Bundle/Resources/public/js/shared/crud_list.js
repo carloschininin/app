@@ -1,7 +1,7 @@
 const filterText = document.getElementById("filter_text");
 const filterSize = document.getElementById("filter_size");
 
-let CRUDList = function () {
+const CRUDList = function () {
     let generateRoute = function (route) {
         if (filterText) {
             route += '?b=' + filterText.value;
@@ -47,3 +47,4 @@ let CRUDList = function () {
 }();
 
 window.CRUDList = CRUDList;
+export default CRUDList;

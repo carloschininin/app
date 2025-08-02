@@ -1,16 +1,8 @@
-// import 'select2/dist/css/select2.min.css'
+import 'select2/dist/css/select2.min.css'
+
 import 'select2/dist/js/select2.full.min'
 
-const btnAddItems = document.querySelectorAll('.add_collection_item');
-btnAddItems.forEach(item => {
-    item.addEventListener('click', () => {
-        setTimeout(() => {
-            Select2();
-        }, 100);
-    })
-})
-
-export const Select2 = () => {
+const Select2 = () => {
     $('.js-select2:not(.js-select2-enabled)').each((index, element) => {
         let el = $(element);
 
@@ -44,4 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Select2();
 })
 
+document.addEventListener('addCollectionItemEvent', () => {
+    Select2();
+})
+
 window.Select2 = Select2;
+export default Select2;

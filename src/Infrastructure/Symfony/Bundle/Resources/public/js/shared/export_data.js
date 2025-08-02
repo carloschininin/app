@@ -1,4 +1,4 @@
-export async function exportData(urlExport, formFilter, filenameExport='data_export') {
+export default async function exportData(urlExport, formFilter, filenameExport='data_export') {
     const formData = new FormData(formFilter);
     if (!urlExport) return;
 

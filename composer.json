@@ -1,7 +1,7 @@
 {
   "name": "carloschininin/app",
   "description": "Utilities for applications",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "type": "library",
   "license": "proprietary",
   "minimum-stability": "dev",

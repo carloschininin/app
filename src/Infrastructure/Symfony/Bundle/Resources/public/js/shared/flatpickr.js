@@ -1,16 +1,13 @@
-// import "flatpickr/dist/flatpickr.min.css"
+import "flatpickr/dist/flatpickr.min.css"
+
 import "flatpickr/dist/flatpickr.min"
 import { Spanish } from "flatpickr/dist/l10n/es";
 
-export let Flatpickr = function () {
-    // Init Flatpickr (with .js-flatpickr class)
+const Flatpickr = function () {
     $('.js-flatpickr:not(.js-flatpickr-enabled)').each((index, element) => {
         let el = $(element);
-
-        // Add .js-flatpickr-enabled class to tag it as activated
         el.addClass('js-flatpickr-enabled');
 
-        // Init it
         flatpickr(el, {
             locale: Spanish,
             dateFormat: "Y-m-d",
@@ -26,3 +23,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.Flatpickr = Flatpickr;
+export default Flatpickr;
