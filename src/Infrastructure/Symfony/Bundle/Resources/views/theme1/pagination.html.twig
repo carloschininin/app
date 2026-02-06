@@ -56,7 +56,7 @@
             {% if hasInfo %}
                 <div class="col-6 col-sm-auto">
                     {% if default_results_per_page is defined %}
-                        {% set limit = app.request.get('limit') ?: paginator.pageSize  %}
+                        {% set limit = app.request.query.get('limit') ?: paginator.pageSize  %}
                         <label for="filter_size" class="d-none"></label>
                         <select id="filter_size" class="form-control form-select form-select-sm" name="limit">
                             {% for key,value in default_results_per_page %}
@@ -87,7 +87,7 @@
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" placeholder="Buscar"
                            aria-label="Recipient's username" aria-describedby="basic-addon2"
-                           name="b" id="filter_text" value="{{ app.request.get('b') }}"/>
+                           name="b" id="filter_text" value="{{ app.request.query.get('b') }}"/>
                     <span class="input-group-text" id="filter_text_icon" role="button">
                         <i class="fas fa-search fs-4"></i>
                     </span>
