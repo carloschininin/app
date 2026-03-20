@@ -46,7 +46,7 @@ class TranslationRuntime implements RuntimeExtensionInterface
     {
         $key = self::CACHE_TAG.$source.$target.'_'.md5($text);
 
-        return $this->baseCache->get($key, function () use ($source, $target, $text) {
+        return $this->baseCache->get($key, static function () use ($source, $target, $text) {
             return GoogleTranslate::translate($source, $target, $text);
         }, [self::CACHE_TAG], BaseCache::CACHE_TIME_LONG);
     }

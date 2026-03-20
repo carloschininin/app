@@ -36,7 +36,7 @@ class MonthDatePickerTransformer implements DataTransformerInterface
 
         $mes = array_search($value->format('m'), self::$months, true);
 
-        return sprintf('%s-%s', $mes, $value->format('Y'));
+        return \sprintf('%s-%s', $mes, $value->format('Y'));
     }
 
     /**
@@ -49,7 +49,7 @@ class MonthDatePickerTransformer implements DataTransformerInterface
         }
 
         $parts = explode('-', $value);
-        if (2 !== count($parts)) {
+        if (2 !== \count($parts)) {
             throw new TransformationFailedException('Formato inválido');
         }
 
@@ -61,7 +61,7 @@ class MonthDatePickerTransformer implements DataTransformerInterface
         }
 
         try {
-            return new \DateTime(sprintf('%s-%s-01', $year, self::$months[$month]));
+            return new \DateTime(\sprintf('%s-%s-01', $year, self::$months[$month]));
         } catch (\Exception) {
             throw new TransformationFailedException('Fecha inválida');
         }

@@ -1,15 +1,19 @@
 <?php
 
-use CarlosChininin\App\Infrastructure\EventSubscriber\RedirectToPreferredLocaleSubscriber;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType;
+declare(strict_types=1);
+
+/*
+ * This file is part of the PIDIA.
+ * (c) Carlos Chininin <cio@pidia.pe>
+ */
+
 use CarlosChininin\App\Domain\Model\AuthMenu\MenuServiceInterface;
+use CarlosChininin\App\Infrastructure\Doctrine\Type\AbstractEnumType;
 use CarlosChininin\Util\Pagination\DoctrinePaginator;
 use CarlosChininin\Util\Pagination\PaginatorInterface;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $configurator): void {
-
     $services = $configurator->services();
 
     $services

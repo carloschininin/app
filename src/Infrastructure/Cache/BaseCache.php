@@ -26,7 +26,7 @@ class BaseCache
 
     public function get(string $key, callable $callback, array $tags = [], int $time = self::CACHE_TIME)
     {
-        return $this->baseCache->get($key, function (ItemInterface $item) use ($callback, $tags, $time) {
+        return $this->baseCache->get($key, static function (ItemInterface $item) use ($callback, $tags, $time) {
             $item->tag($tags);
             $item->expiresAfter($time);
 

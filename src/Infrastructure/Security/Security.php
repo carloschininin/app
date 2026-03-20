@@ -239,8 +239,8 @@ final class Security
 
         $authsMenu = $this->authsMenu();
 
-        return in_array($permissionAll->value, $authsMenu, true)
-            || (in_array($permission->value, $authsMenu, true) && $this->isOwner($owner));
+        return \in_array($permissionAll->value, $authsMenu, true)
+            || (\in_array($permission->value, $authsMenu, true) && $this->isOwner($owner));
     }
 
     private function authsMenu(): array
