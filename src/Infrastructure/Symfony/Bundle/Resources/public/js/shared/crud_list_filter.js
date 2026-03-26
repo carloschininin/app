@@ -59,6 +59,8 @@ const listFilter = function (urlExport=null, filenameExport=''){
 
     // Download data export
     document.addEventListener('DOMContentLoaded', () => {
+        if (!urlExport) return;
+
         const btnExports = document.querySelectorAll('.btn-export');
 
         btnExports.forEach(element => {
@@ -70,5 +72,19 @@ const listFilter = function (urlExport=null, filenameExport=''){
         });
     });
 }
+
+// API de navegación por páginas — disponible en cualquier página con form_filter,
+// sin necesidad de llamar listFilter() explícitamente.
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('#form_filter') || document.querySelector('[name="form_filter"]');
+    const inputPage = document.querySelector('#form_filter_page');
+    if (!form || !inputPage) return;
+
+    window.goToPage = function (page) {
+        if (page == null) return;
+        inputPage.value = page;
+        form.submit();
+    };
+});
 
 window.listFilter = listFilter;
