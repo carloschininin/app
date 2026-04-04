@@ -26,13 +26,17 @@ trait FilterFieldsTrait
             ]);
     }
 
-    public function addTextSearchFilterFields(FormBuilderInterface $builder, string $label = 'Buscar', string $placeholder = ''): void
-    {
+    public function addTextSearchFilterFields(
+        FormBuilderInterface $builder, 
+        string $label = 'Buscar', 
+        string $placeholder = '',
+        string $class = '',
+    ): void {
         $builder
             ->add('textSearch', TextType::class, [
                 'required' => false,
                 'label' => $label,
-                'attr' => ['placeholder' => $placeholder],
+                'attr' => ['placeholder' => $placeholder, 'class' => $class],
             ]);
     }
 }
